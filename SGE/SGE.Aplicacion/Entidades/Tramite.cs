@@ -24,6 +24,7 @@ public class Tramite
         this._descripcion = descripcion;
         this._idUsuario = idUsuario;
         this._fechaYhoraModificacion = _fechaYhoraCreacion;
+        this._idUsuario = idUsuario;
 
     }
 

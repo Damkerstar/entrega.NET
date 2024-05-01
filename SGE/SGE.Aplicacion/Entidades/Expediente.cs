@@ -20,5 +20,4 @@ class Expediente{
         this._usuarioID = usuarioID;
 
     }
-
 }
