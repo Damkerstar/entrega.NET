@@ -1,3 +1,5 @@
+namespace SGE.Aplicacion;
+
 enum EstadoExpediente{
     Recien_Iniciado,
     Para_Resolver,
