@@ -19,4 +19,5 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTramite, IServicioAuto
         }
 
     }
+
 }
