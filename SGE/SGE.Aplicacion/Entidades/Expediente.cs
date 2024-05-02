@@ -15,11 +15,7 @@ class Expediente{
 
         s_id++;
         _id = s_id;
-
-        if(ExpedienteValidador.CaratulaValidador(caratula)) 
-        {
         this._caratula = caratula;
-        }
         this._fechaYHoraActualizacion = this._fechaYHoraCreacion;
         this._usuarioID = usuarioID;
 
