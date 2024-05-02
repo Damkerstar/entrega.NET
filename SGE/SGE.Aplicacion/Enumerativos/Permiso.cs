@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-enum Permisos
+public enum Permiso
 {
 
     ExpedienteAlta, // Puede realizar altas de expedientes
