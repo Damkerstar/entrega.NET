@@ -1,19 +1,24 @@
 namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ExpedienteValidador validador)
+public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ExpedienteValidador validador, IServicioAutorizacion autorizacion)
 {
         
-    public void Ejecutar(Expediente e)
+    public void Ejecutar(Expediente e, int idUsuario)
     {
 
-        if(!validador.Validar(e, out string errorMessage))
+        if(autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
         {
 
-            throw new ValidacionException(errorMessage);
+            if(!validador.Validar(e, out string errorMessage))
+            {
+
+                throw new ValidacionException(errorMessage);
+
+            }
+            
+            repo.AgregarExpediente(e);
 
         }
-        
-        repo.AgregarExpediente(e);
 
     } 
     

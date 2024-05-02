@@ -1,0 +1,13 @@
+Pregunta: Cómo almacenar la ID en el repositorio y que la entidad la reciba.
+
+Además, es necesario destacar que, en el caso de las altas, corresponde a los repositorios, y
+no a los casos de uso, la responsabilidad de asignar el Id de las entidades, asegurándose de asignarlos de
+manera automática e incremental. 
+
+Pregunta: Cómo asignar la ID de Expediente dentro del trámite.
+
+Pregunta: En CasoDeUsoExpedienteBaja, se debe hacer un new de CasoDeUsoTramiteBaja para enviar la ID del expediente o hay otra forma de hacerlo (Para eliminar todos los trámites bajo ExpedienteID).
+
+
+
+
