@@ -1,19 +1,24 @@
 namespace SGE.Aplicacion;
 
-class ExpedienteValidador
+public class ExpedienteValidador
 {
 
-    public static bool CaratulaValidador(string caratula)
+    public bool Validar(Expediente e, out string errorMessage)
     {
 
-        if(caratula == "")
+        errorMessage = "";
+
+        if(string.IsNullOrWhiteSpace(e.Caratula))
         {
-            return true;
+            errorMessage = "La carátula no puede estar vacía.\n";
         }
-        else
+
+        if(e.ID <= 0)
         {
-            throw new ValidacionException("La carátula no puede estar vacía.");
+            errorMessage += "La ID no es válida.\n";
         }
+
+        return (errorMessage == "");
 
     }
 
