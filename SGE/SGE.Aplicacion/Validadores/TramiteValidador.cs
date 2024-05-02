@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-public class TramiteValidador{
+class TramiteValidador{
     public bool ValidarTramite(Tramite tramite,out string msg){
         msg = "";
         if(string.IsNullOrWhiteSpace(tramite.Descripcion)){
