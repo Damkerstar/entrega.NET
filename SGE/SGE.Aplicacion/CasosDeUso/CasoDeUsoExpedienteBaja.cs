@@ -9,7 +9,7 @@ public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo, IServicioAutor
         if(autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
         {
 
-            CasoDeUsoTramiteBaja.Ejecutar(e.ID);
+            CasoDeUsoTramiteBaja.Ejecutar(e.ID, idUsuario); //Ver si no es mejor mandar la lista de tramites en lugar de la ID de Expediente
 
             repo.EliminarExpediente(e.ID);
 
