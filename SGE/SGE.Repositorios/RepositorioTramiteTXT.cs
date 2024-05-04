@@ -6,14 +6,8 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     readonly string _nombreArch = "tramites.txt";
     public void agregarTramite(Tramite tramite)
     {
-        using var sw = new StreamWriter(_nombreArch, true);
-        sw.WriteLine(tramite.id);
-        sw.WriteLine(tramite.etiqueta);
-        sw.WriteLine(tramite.descripcion);
-        sw.WriteLine(tramite.fechaYhoraCreacion);
-        sw.WriteLine(tramite.fechaYhoraModificacion);
-        sw.WriteLine(tramite.IdUsuario);
-        //ASIGNARLE EL ID 
+        escribirTramite(tramite);
+        //ASIGNARLE EL ID
     }
 
     public List<Tramite> ListarTramite()
@@ -99,5 +93,24 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
             }
         }
         return listaPorExpediente;
+    }
+
+    private void sobreescribirTramites(Tramite tramite)
+    {
+        if(file.Exists(_nombreArch))
+        {
+            escribirTramite(tramite);
+        }
+    }
+
+    private void escribirTramite(Tramite tramite)
+    {
+        using var sw = new StreamWriter(_nombreArch, true);
+        sw.WriteLine(tramite.id);
+        sw.WriteLine(tramite.etiqueta);
+        sw.WriteLine(tramite.descripcion);
+        sw.WriteLine(tramite.fechaYhoraCreacion);
+        sw.WriteLine(tramite.fechaYhoraModificacion);
+        sw.WriteLine(tramite.IdUsuario);
     }
 }
