@@ -1,1 +1,5 @@
-//Asimismo, se debe desarrollar un caso de uso para listar todos los expedientes (sin incluir sus trámites)
+namespace SGE.Aplicacion;
+class CasoDeUsoExpedienteConsultaTodos
+{
+
+}
