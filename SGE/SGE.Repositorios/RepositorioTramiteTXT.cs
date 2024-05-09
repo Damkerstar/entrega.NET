@@ -7,7 +7,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     public void agregarTramite(Tramite tramite)
     {
         escribirTramite(tramite);
-        int? id = RepositorioTramiteID.conseguirID();
+        int? id = RepositorioTramiteID.conseguirID(); //
     }
 
     public List<Tramite> ListarTramite()
