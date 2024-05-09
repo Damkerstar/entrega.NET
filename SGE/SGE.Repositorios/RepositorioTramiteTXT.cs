@@ -1,4 +1,7 @@
 ﻿namespace SGE.Repositorios;
+
+using System.Collections.Generic;
+using System.IO;
 using SGE.Aplicacion;
 
 public class RepositorioTramiteTXT: ITramiteRepositorio
@@ -45,7 +48,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
                 }
             }
             else
-                throw new RepositorioException("No existe el tramite en cuestion");
+                throw new RepositorioException("No existe el tramite en solicitado");
         }
     }
 
