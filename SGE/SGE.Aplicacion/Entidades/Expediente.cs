@@ -3,15 +3,13 @@ namespace SGE.Aplicacion;
 public class Expediente
 {
 
-    private static int s_id { get; set; } = 0;
     private int  _id;
     public int ID => _id;
-    private string _caratula;
-    public string Caratula => _caratula;
-    private DateTime _fechaYHoraCreacion {get;} = DateTime.Now;
-    private DateTime _fechaYHoraActualizacion {get;}
-    private int _usuarioID {get;}
-    private EstadoExpediente _estado {get;} = EstadoExpediente.Recien_Iniciado;
+    public string caratula;
+    public DateTime fechaYHoraCreacion {get;} = DateTime.Now;
+    public DateTime fechaYHoraActualizacion {get;}
+    public int usuarioID {get;}
+    public EstadoExpediente estado {get;} = EstadoExpediente.Recien_Iniciado;
 
     public Expediente(string caratula, int usuarioID) 
     {

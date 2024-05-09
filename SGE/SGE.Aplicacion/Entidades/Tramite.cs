@@ -5,15 +5,18 @@ public class Tramite
 
 
     public int ExpedienteId {get; set;}
-    private static int s_id {get; set;} = 0;
-    private int _id {get;}
-    private Etiqueta_Tramite _etiqueta {get;} = Etiqueta_Tramite.Escrito_Presentado;
-    private string _descripcion;
-    public string Descripcion => _descripcion;
-    private DateTime _fechaYhoraCreacion{get;} = DateTime.Now;
-    private DateTime _fechaYhoraModificacion {get;}
-    private int _idUsuario;
-    public int IdUsuario => _idUsuario;
+    private int _id {get;};
+    public int IDTramite
+    {
+        get => _id;
+        set => _id = value;
+    }
+    public EtiquetaTramite etiqueta {get;} = Etiqueta_Tramite.Escrito_Presentado;
+    public string descripcion;
+    public DateTime fechaYhoraCreacion{get;} = DateTime.Now;
+    public DateTime fechaYhoraModificacion {get;}
+    private int idUsuario;
+    public int IdUsuario => idUsuario;
 
 
     public Tramite(string descripcion, int idUsuario) 

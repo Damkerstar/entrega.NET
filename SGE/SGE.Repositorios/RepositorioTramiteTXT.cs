@@ -13,17 +13,18 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     public List<Tramite> ListarTramite()
     {
         var resultado = new List<Tramite>();
-        using var sr = new StreamReader(_nombreArch);
+        using var sr = new StreamReader(_nombreArch)
         while(!sr.EndOfStream)
         {
             // COMPLETAR
             var tramiteCopi = new Tramite();
-            tramiteCopi.id = sr.ReadLine();
+            tramiteCopi. = int.Parse(sr.ReadLine() ?? "");
             tramiteCopi. = sr.ReadLine();
             tramiteCopi. = sr.ReadLine();
             tramiteCopi. = sr.ReadLine();
             tramiteCopi. = sr.ReadLine();
             tramiteCopi. = sr.ReadLine();
+            resultado.Add(tramiteCopi);
         }
         return resultado;
     }
