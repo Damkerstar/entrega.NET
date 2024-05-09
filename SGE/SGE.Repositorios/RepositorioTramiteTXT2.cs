@@ -31,7 +31,6 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
 
     public void EliminarTramite(Tramite tramite)
     {
-        //COMPLETAR SI EXISTE EL ARCHIVO Y SI 
         if(File.Exists(_nombreArch))
         {
             List<Tramite> listTramite = ListarTramite();
@@ -63,7 +62,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
 
         foreach(Tramite tActual in lista)
         {
-            sobreescribirTramites(tActual); //ETODO PRIVADO CREAR
+            sobreescribirTramites(tActual);
         }
     }
 
@@ -74,7 +73,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
         maxTramite.ID = -1;
         foreach(Tramite tActual in listaPorExpedientes)
         {
-            if(maxTramite.ID < tActual.id)
+            if(maxTramite.ID < tActual.ID)
             {
                 maxTramite = tActual;
             }
@@ -90,7 +89,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
         {
             if(tActual.ExpedienteId == idE)
             {
-                listarPorExpediente.Add(tActual);   
+                listaPorExpediente.Add(tActual);   
             }
         }
         return listaPorExpediente;
@@ -107,11 +106,11 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     private void escribirTramite(Tramite tramite)
     {
         using var sw = new StreamWriter(_nombreArch, true);
-        sw.WriteLine(tramite.id);
-        sw.WriteLine(tramite.etiqueta);
+        sw.WriteLine(tramite.IDTramite);
+        sw.WriteLine(tramite.Etiqueta);
         sw.WriteLine(tramite.descripcion);
         sw.WriteLine(tramite.fechaYhoraCreacion);
         sw.WriteLine(tramite.fechaYhoraModificacion);
-        sw.WriteLine(tramite.IdUsuario);
+        sw.WriteLine(tramite.idUsuario);
     }
 }
