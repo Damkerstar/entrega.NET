@@ -1,8 +1,5 @@
 namespace SGE.Repositorios;
 using SGE.Aplicacion;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 public class RepositorioExpedienteTXT: IExpedienteRepositorio
 {
