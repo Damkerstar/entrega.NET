@@ -6,7 +6,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     readonly string _nombreArch = "tramites.txt";
     public void AgregarTramite(Tramite tramite)
     {
-        int? id = RepositorioTramiteID.conseguirID();
+        int id = RepositorioTramiteID.conseguirID();
         escribirTramite(tramite);
     }
 

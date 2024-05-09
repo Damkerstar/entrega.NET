@@ -6,10 +6,10 @@ public class RepositorioTramiteID
 
     //readonly string _nombresito = "TramiteID.txt";
 
-    public static int? conseguirID()
+    public static int conseguirID()
     {
 
-        int? id;
+        int id;
         using var sr = new StreamReader("TramiteID.txt");
         {   
             id = int.Parse(sr.ReadLine() ?? "");
