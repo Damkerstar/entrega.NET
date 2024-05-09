@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-class AutorizacionException : Exception
+public class AutorizacionException : Exception
 {
 
     public AutorizacionException() {}
