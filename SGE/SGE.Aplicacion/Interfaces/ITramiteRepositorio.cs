@@ -2,9 +2,9 @@ namespace SGE.Aplicacion;
 
 public interface ITramiteRepositorio
 {
-    public void agregarTramite(Tramite tramite);
-    public void eliminarTramite(Tramite tramite);
-    public void eliminarCompleto(int idE);
-    public void buscarUltimo(int idE);
-    List<Tramite> listarTramite();
+    public void AgregarTramite(Tramite tramite);
+    public void EliminarTramite(Tramite tramite);
+    public void EliminarCompleto(int idE);
+    public void BuscarUltimo(int idE);
+    List<Tramite> ListarTramite();
 }

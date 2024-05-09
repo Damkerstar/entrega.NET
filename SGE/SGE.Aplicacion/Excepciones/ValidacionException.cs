@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-class ValidacionException : Exception
+public class ValidacionException : Exception
 {
 
     public ValidacionException() {}

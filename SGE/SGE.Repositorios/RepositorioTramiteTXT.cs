@@ -7,7 +7,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     public void agregarTramite(Tramite tramite)
     {
         escribirTramite(tramite);
-        //ASIGNARLE EL ID
+        int? id = RepositorioTramiteID.conseguirID();
     }
 
     public List<Tramite> ListarTramite()
@@ -32,9 +32,9 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     public void eliminarTramite(Tramite tramite)
     {
         //COMPLETAR SI EXISTE EL ARCHIVO Y SI 
-        if(file.Exists(_nombreArch))
+        if(File.Exists(_nombreArch))
         {
-            List<tramite> listTramite = ListarTramite();
+            List<Tramite> listTramite = ListarTramite();
             if(listTramite.Contains(tramite))
             {
                 listTramite.Remove(tramite);
@@ -98,7 +98,7 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
 
     private void sobreescribirTramites(Tramite tramite)
     {
-        if(file.Exists(_nombreArch))
+        if(File.Exists(_nombreArch))
         {
             escribirTramite(tramite);
         }

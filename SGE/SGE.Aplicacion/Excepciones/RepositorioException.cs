@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-class RepositorioException : Exception
+public class RepositorioException : Exception
 {
 
     public RepositorioException() {}
