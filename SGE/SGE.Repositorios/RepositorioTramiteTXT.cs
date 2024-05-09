@@ -7,13 +7,13 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
     public void agregarTramite(Tramite tramite)
     {
         escribirTramite(tramite);
-        int? id = RepositorioTramiteID.conseguirID(); //
+        int? id = RepositorioTramiteID.conseguirID();
     }
 
     public List<Tramite> ListarTramite()
     {
         var resultado = new List<Tramite>();
-        using var sr = new StreamReader(_nombreArch)
+        using var sr = new StreamReader(_nombreArch);
         while(!sr.EndOfStream)
         {
             // COMPLETAR
