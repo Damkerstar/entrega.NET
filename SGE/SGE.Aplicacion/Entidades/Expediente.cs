@@ -13,12 +13,9 @@ public class Expediente
 
     public Expediente(string caratula, int usuarioID) 
     {
-
-        s_id++;
-        _id = s_id;
-        this._caratula = caratula;
-        this._fechaYHoraActualizacion = this._fechaYHoraCreacion;
-        this._usuarioID = usuarioID;
+        this.caratula = caratula;
+        this.fechaYHoraActualizacion = this.fechaYHoraCreacion;
+        this.usuarioID = usuarioID;
 
     }
 }
