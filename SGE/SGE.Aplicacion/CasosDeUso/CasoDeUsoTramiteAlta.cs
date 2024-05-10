@@ -11,7 +11,7 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValida
             {
                 throw new Exception(msg);
             }
-            repoTramite.agregarTramite(tramite);
+            repoTramite.AgregarTramite(tramite);
 
         }
     }

@@ -3,6 +3,7 @@ class CasoDeUsoTramiteConsultaPorEtiqueta(ITramiteRepositorio repoT)
 {
     public void Ejecutar(int idE)
     {
-        repoT.buscarUltimo(idE);
+        repoT.BuscarEtiqueta(idE);
+        
     }
 }
