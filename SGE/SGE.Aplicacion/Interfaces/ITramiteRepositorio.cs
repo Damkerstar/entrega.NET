@@ -4,6 +4,6 @@ public interface ITramiteRepositorio
 {
     void AgregarTramite(int idTramite);
     void EliminarTramite(int idTramite);
-    void EliminarCompleto(Expediente expediente);
+    void EliminarCompleto(int idExpediente);
     List<Tramite> ListarTramite();
 }

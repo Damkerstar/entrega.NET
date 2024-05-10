@@ -9,15 +9,4 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTramite, IServicioAuto
         }
 
     }
-
-    public void Ejecutar(Expediente e, int idUsuario)
-    {
-
-        if(autorizacion.PoseeElPermiso(0, Permiso.TramiteBaja))
-        {
-            repoTramite.EliminarCompleto(e);
-        }
-
-    }
-
 }

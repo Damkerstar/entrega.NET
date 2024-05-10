@@ -4,7 +4,6 @@ using SGE.Aplicacion;
 public class RepositorioTramiteTXT: ITramiteRepositorio
 {
     readonly string _nombreArch = "tramites.txt";
-    // PREGUTAR SI HACER EL ID ACA DENTRO PORQUE SINO HAY QUE HACER REPOSITORIOS APARTE CON SU ID
     public static void AgregarTramite(Tramite tramite)
     {
         int id = RepositorioTramiteID.conseguirID();
@@ -55,13 +54,13 @@ public class RepositorioTramiteTXT: ITramiteRepositorio
         }
     }
 
-    public static void EliminarCompleto(Expediente e)
+    public static void EliminarCompleto(int idE)
     {
         List<Tramite> lista = ListarTramite();
 
         foreach(Tramite tActual in lista)
         {
-            if(tActual.ExpedienteId == e.ID)
+            if(tActual.ExpedienteId == idE)
             {
                 lista.Remove(tActual);
             }
