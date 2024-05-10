@@ -44,12 +44,55 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
         List<Expediente> listaExpedientes = ListarExpedientes();
 
         RepositorioTramiteTXT.EliminarCompleto(eID);
+        bool encontre = false;
 
-        if(listaExpedientes.Contains)
+        if(File.Exists(_nomArchivo))
+        {
+
+            foreach(Expediente e in listaExpedientes)
+            {
+
+                if(e.ID == eID)
+                {
+
+                    listaExpedientes.Remove(e);
+                    encontre = true;
+
+                }
+
+            }
+
+        }
+
+        if(!encontre)
+        {
+            throw new RepositorioException("El expediente buscado no existe.");
+        }
+        else
+        {
+            SobreEscribirExpediente(listaExpedientes);
+        }
 
     }
 
-    public void EscribirExpediente(Expediente e)
+    private static void SobrescribirExpediente(List<Expediente> lista)
+    {
+
+        if(File.Exists(_nomArchivo))
+        {
+
+            foreach(Expediente e in lista)
+            {
+
+                EscribirExpediente(e);
+
+            }
+
+        }
+
+    }
+
+    public static void EscribirExpediente(Expediente e)
     {
 
         using var sw = new StreamWriter(_nomArchivo);

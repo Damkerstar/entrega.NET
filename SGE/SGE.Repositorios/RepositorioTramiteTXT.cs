@@ -1,7 +1,7 @@
 ﻿namespace SGE.Repositorios;
 using SGE.Aplicacion;
 
-public class RepositorioTramiteTXT: ITramiteRepositorio
+public class RepositorioTramiteTXT : ITramiteRepositorio
 {
     readonly string _nombreArch = "tramites.txt";
     public void AgregarTramite(Tramite tramite)
