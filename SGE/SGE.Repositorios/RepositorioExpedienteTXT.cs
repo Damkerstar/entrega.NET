@@ -45,15 +45,7 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
 
         RepositorioTramiteTXT.EliminarCompleto(eID);
 
-        foreach(Expediente e in listaExpedientes)
-        {
-            
-            if(e.ID == eID)
-            {
-                listaExpedientes.Remove(e);
-            }
-
-        }
+        if(listaExpedientes.Contains)
 
     }
 
