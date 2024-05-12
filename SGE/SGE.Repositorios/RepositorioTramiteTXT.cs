@@ -141,13 +141,25 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     public void ModificarTramite(Tramite t, EtiquetaTramite etiqueta)
     {
-        
-        List<Tramite> lista = ListarTramite();
 
-        t.Etiqueta = etiqueta;
+        List<Tramite> listaTramites = ListarTramite();
+        Tramite tramite;
+        int i = 0;
 
-        SobrescribirListaTramites(lista);
-
+        while(i <= listaTramites.Count && i != -1)
+        {
+            tramite = listaTramites[i];
+            if(tActual.ID == t.ID)
+            {
+                t.Etiqueta = etiqueta;
+                i = -1;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        SobrescribirListaTramites(copiaLista);
     }
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
