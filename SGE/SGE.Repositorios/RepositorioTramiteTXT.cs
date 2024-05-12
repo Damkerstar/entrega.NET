@@ -152,9 +152,16 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
     {
-        foreach(Tramite tramiteAct in listTramite)
+
+        if(File.Exists(_nombreArch))
         {
-            EscribirTramite(tramiteAct, false);
+            using (var sw = new StreamWriter(_nombreArch, false))
+            {
+                foreach(Tramite tramiteAct in listTramite)
+                {    
+                    sw.WriteLine($"{tramite.IDTramite} || {tramite.ExpedienteId} || {tramite.idUsuario} || {tramite.Etiqueta} || {tramite.descripcion} || {tramite.fechaYhoraCreacion} || {tramite.fechaYhoraModificacion} || {tramite.idUsuario}");
+                }
+            }
         }
     }
 
