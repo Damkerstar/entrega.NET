@@ -163,13 +163,6 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         }
     }
 
-    public int BuscarExpedientePorTramite(Tramite t)
-    {
-
-        return t.ExpedienteId;
-
-    }
-
     public Tramite BuscarTramite(int idTramite)
     {
 
