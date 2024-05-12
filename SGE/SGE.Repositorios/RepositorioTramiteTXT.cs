@@ -125,7 +125,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    public List<Tramite> ListarPorExpediente(int idE)
+    private List<Tramite> ListarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();
@@ -141,13 +141,25 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     public void ModificarTramite(Tramite t, EtiquetaTramite etiqueta)
     {
-        
-        List<Tramite> lista = ListarTramite();
+        List<Tramite> listaTramites = ListarTramite();
+        Tramite tramite;
+        int i = 0;
 
-        t.Etiqueta = etiqueta;
-
-        SobrescribirListaTramites(lista);
-
+        while(i <= listaTramites.Count && i != -1)
+        {
+            tramite = listaTramites[i];
+            if(tramite.IDTramite == t.IDTramite)
+            {
+                tramite.Etiqueta = etiqueta;
+                tramite.fechaYhoraModificacion = DateTime.Now;
+                i = -1;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        SobrescribirListaTramites(listaTramites);
     }
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
@@ -187,7 +199,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     }
 
-    public List<Tramite> BuscarEtiqueta(string etiqueta)
+    public void BuscarEtiqueta(string etiqueta)
     {
         List<Tramite> listaTramites = ListarTramite();
         EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
@@ -199,6 +211,14 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
                 resultado.Add(tramite);
             }
         }
-        return resultado;
+        ImprimirPantallaPorEtiqueta(resultado);
+    }
+
+    private void ImprimirPantallaPorEtiqueta(List<Tramite> listTramite)
+    {
+        foreach(Tramite tramite in listTramite)
+        {
+            Console.WriteLine(tramite);
+        }
     }
 }

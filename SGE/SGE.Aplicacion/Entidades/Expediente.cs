@@ -42,8 +42,8 @@ public class Expediente
            ID de Usuario: {usuarioID}
            Carátula: {caratula}
            Fecha y hora de:
-             creación {fechaYHoraCreacion.ToString()}
-             modificacion {fechaYHoraActualizacion.ToString()}
+             creación {fechaYHoraCreacion}
+             modificacion {fechaYHoraActualizacion}
            Estado: {Estado} 
         """ + "\n";
     }
