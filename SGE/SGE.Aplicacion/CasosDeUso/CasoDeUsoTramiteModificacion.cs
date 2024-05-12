@@ -1,14 +1,17 @@
 using SGE.Aplicacion;
 
-public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, EspecificacionCambioEstado especificacionEstado, ServicioActualizacionEstado servicioActualizacion)
+public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, EspecificacionCambioEstado cambioEstado, IExpedienteRepositorio repoExpediente)
 {
-    public void Ejecutar(int idUsuario, int idTramite)
+    public void Ejecutar(int idTramite, string etiqueta, int idUsuario)
     {
-        if(especificacionEstado.VerificacionPermiso(idUsuario, Permiso.TramiteModificacion))
+        if(autorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteModificacion))
         {
-            repoTramite.ModificarTramite(idTramite);
-            int idExpediente = repoTramite.EncontrarExpediente(idTramite);
-            servicioActualizacion.Ejecutar(idExpediente);
+            repoTramite.ModificarTramite(idTramite, etiqueta);
+            Tramite tAux = repoTramite.BuscarTramite(idTramite);
+
+            int idExpediente = repoTramite.BuscarExpedientePorTramite(tAux);
+            Expediente eAux = repoExpediente.BuscarExpedientePorId(idExpediente);
+            cambioEstado.Ejecutar(eAux, tAux.Etiqueta);
         }
     }
 }

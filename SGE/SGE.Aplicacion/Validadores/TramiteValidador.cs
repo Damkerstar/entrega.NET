@@ -6,16 +6,18 @@ public class TramiteValidador
     {
 
         msg = "";
+
         if(string.IsNullOrWhiteSpace(tramite.descripcion))
         {
-            msg = "La descripcion del tramite no puede ser vacia. ";
+            msg = "La descripcion no puede estar vacía. ";
         }
         
-        if(tramite.idUsuario < 0)
+        if(tramite.idUsuario <= 0)
         {
-            msg += "El id de usuario tiene que ser mayor que 0.";
+            msg += "El ID de usuario debe que ser mayor que 0.";
         }
-        return msg == "";
+
+        return (msg == "");
 
     }
 }

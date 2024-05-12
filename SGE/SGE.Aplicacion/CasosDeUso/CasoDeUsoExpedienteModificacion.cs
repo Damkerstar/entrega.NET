@@ -1,13 +1,15 @@
 namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, ITramiteRepositorio repoTramite, EspecificacionCambioEstado especificacion, ServicioActualizacionEstado actualizacionEstado)
+public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, ServicioActualizacionEstado actualizacionEstado)
 {
-    public void Ejecutar(int idE,int idUsuario)
+    public void Ejecutar(int eId,int idUsuario)
     {
-        if (especificacion.VerificacionPermiso(idUsuario, Permiso.ExpedienteModificacion))
+        if (autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteModificacion))
         {
-            Tramite tramite = repoTramite.BuscarUltimo(idE);
-            repoExpe.ModificarEstado(tramite.ExpedienteId, tramite.Etiqueta);
+            Tramite tramite = repoTramite.BuscarUltimo(eId);
+            Expediente e = repoExpe.BuscarExpedientePorId(eId);
+            string etiqueta = $"{tramite.Etiqueta}";
+            repoExpe.ModificarEstadoExpediente(e, etiqueta);
         }
     }
 }

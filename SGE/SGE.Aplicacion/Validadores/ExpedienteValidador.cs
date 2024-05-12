@@ -15,7 +15,7 @@ public class ExpedienteValidador
 
         if(e.ID <= 0)
         {
-            errorMessage += "La ID no es válida.\n";
+            errorMessage += "La ID debe ser mayor a 0.\n";
         }
 
         return (errorMessage == "");

@@ -1,7 +1,7 @@
 namespace SGE.Repositorios;
 using SGE.Aplicacion;
 
-public class RepositorioExpedienteTXT: IExpedienteRepositorio
+public class RepositorioExpedienteTXT : IExpedienteRepositorio
 {
     
     readonly string _nomArchivo = @"..\SGE.Repositorios\expedientes.txt";    
@@ -67,12 +67,12 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
         }
         else
         {
-            SobrescribirListExpediente(listaExpedientes);
+            SobrescribirListaExpediente(listaExpedientes);
         }
 
     }
 
-    private void SobrescribirListExpediente(List<Expediente> lista)
+    private void SobrescribirListaExpediente(List<Expediente> lista)
     {
 
         if(File.Exists(_nomArchivo))
@@ -85,6 +85,37 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
                 }
             }
         }
+    }
+
+    public void ModificarEstadoExpediente(Expediente e, string etiqueta)
+    {
+
+        e.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), etiqueta);
+        e.fechaYHoraActualizacion = DateTime.Now;
+        List<Expediente> lista = ListarExpedientes();
+        SobrescribirListaExpediente(lista);
+
+    }
+
+    public Expediente BuscarExpedientePorId(int eId)
+    {
+
+        List<Expediente> lista = ListarExpedientes();
+
+        foreach(Expediente eAux in lista)
+        {
+
+            if(eAux.ID == eId)
+            {
+
+                return eAux;
+
+            } 
+
+        }
+
+        throw new RepositorioException("El expediente buscado no existe.");
+
     }
 
     public void EscribirExpediente(Expediente e)

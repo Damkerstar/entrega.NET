@@ -8,7 +8,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
     {
         int id = RepositorioTramiteID.conseguirID();
         tramite.IDTramite = id;
-        escribirTramite(tramite, true);
+        EscribirTramite(tramite, true);
     }
 
     public List<Tramite> ListarTramite()
@@ -20,7 +20,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             Tramite tramiteCopi = new Tramite();
             tramiteCopi.IDTramite = int.Parse(sr.ReadLine() ?? "");
             tramiteCopi.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
-            tramiteCopi.Etiqueta = (Etiqueta_Tramite) Enum.Parse(typeof(Etiqueta_Tramite), sr.ReadLine()?? "");
+            tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), sr.ReadLine()?? "");
             tramiteCopi.descripcion = sr.ReadLine();
             tramiteCopi.fechaYhoraCreacion = DateTime.Parse(sr.ReadLine()?? "");
             tramiteCopi.fechaYhoraModificacion = DateTime.Parse(sr.ReadLine()?? "");
@@ -61,7 +61,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
                 throw new RepositorioException("No existe el tramite en cuestion");
             }
 
-            sobrescribirListTramites(listTramite);
+            SobrescribirListaTramites(listTramite);
         }
     }
 
@@ -87,13 +87,13 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
         if(i == -1)
         {
-            sobrescribirListTramites(listaTramite);
+            SobrescribirListaTramites(listaTramite);
         }
     }
 
     public Tramite BuscarUltimo(int idE)
     {
-        List<Tramite> listaPorExpedientes = listarPorExpediente(idE);
+        List<Tramite> listaPorExpedientes = ListarPorExpediente(idE);
         Tramite maxTramite = new Tramite();
 
         maxTramite.IDTramite = -1;
@@ -107,7 +107,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    public List<Tramite> listarPorExpediente(int idE)
+    public List<Tramite> ListarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();
@@ -121,7 +121,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return listaPorExpediente;
     }
 
-    public void TramiteModificacion(int idTramite, string etiqueta)
+    public void ModificarTramite(int idTramite, string etiqueta)
     {
         List<Tramite> listTramite = ListarTramite();
         Tramite tramite;
@@ -131,7 +131,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             tramite = listTramite[i];
             if(tramite.IDTramite == idTramite)
             {
-                tramite.Etiqueta = (Etiqueta_Tramite) Enum.Parse(typeof(Etiqueta_Tramite), etiqueta);
+                tramite.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
                 i = -1;
             }
             else
@@ -146,19 +146,19 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         }
         else
         {
-            sobrescribirListTramites(listTramite);
+            SobrescribirListaTramites(listTramite);
         }
     }
 
-    private void sobrescribirListTramites(List<Tramite> listTramite)
+    private void SobrescribirListaTramites(List<Tramite> listTramite)
     {
         foreach(Tramite tramiteAct in listTramite)
         {
-            escribirTramite(tramiteAct, true);
+            EscribirTramite(tramiteAct, true);
         }
     }
 
-    private void escribirTramite(Tramite tramite, bool ok)
+    private void EscribirTramite(Tramite tramite, bool ok)
     {
         if(File.Exists(_nombreArch))
         {    
@@ -173,5 +173,34 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
                 sw.WriteLine(tramite.idUsuario);
             }
         }    
+    }
+
+    public int BuscarExpedientePorTramite(Tramite t)
+    {
+
+        return t.ExpedienteId;
+
+    }
+
+    public Tramite BuscarTramite(int idTramite)
+    {
+
+        List<Tramite> listaTramites = ListarTramite();
+        Tramite tAux = new Tramite();
+
+        foreach(Tramite aux in listaTramites)
+        {
+
+            if(aux.IDTramite == idTramite)
+            {
+
+                return aux;
+
+            }
+
+        }
+
+        throw new RepositorioException("El expediente buscado no existe.");
+
     }
 }

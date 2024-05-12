@@ -11,8 +11,8 @@ public class Tramite
         get => _id;
         set => _id = value;
     }
-    private Etiqueta_Tramite _etiqueta = Etiqueta_Tramite.Escrito_Presentado;
-    public Etiqueta_Tramite Etiqueta
+    private EtiquetaTramite _etiqueta = EtiquetaTramite.Escrito_Presentado;
+    public EtiquetaTramite Etiqueta
     {
         get => _etiqueta;
         set => _etiqueta = value;
