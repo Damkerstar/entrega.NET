@@ -9,7 +9,7 @@ public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repoExpediente, ITra
         if(autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
         {
 
-            //repoTramite.EliminarCompleto(idExpediente);
+            repoTramite.EliminarCompleto(idExpediente);
 
             repoExpediente.EliminarExpediente(idExpediente);
 

@@ -1,6 +1,6 @@
 using SGE.Aplicacion;
 
-public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, ServicioActualizacionEstado servicioActualizacion, IExpedienteRepositorio repoExpediente)
+public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, ServicioActualizacionEstado servicioActualizacion)
 {
     public void Ejecutar(int idTramite, string etiquetaString, int idUsuario)
     {
@@ -10,9 +10,7 @@ public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServ
             EtiquetaTramite etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiquetaString);
             repoTramite.ModificarTramite(tAux, etiqueta);
 
-            int idExpediente = repoTramite.BuscarExpedientePorTramite(tAux);
-            Expediente eAux = repoExpediente.BuscarExpedientePorId(idExpediente);
-            servicioActualizacion.Ejecutar(eAux, tAux.Etiqueta);
+            servicioActualizacion.Ejecutar(tAux.ExpedienteId, tAux.Etiqueta);
         }
         else
         {

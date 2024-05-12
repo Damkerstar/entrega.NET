@@ -8,7 +8,7 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, IT
         {
             Tramite tramite = repoTramite.BuscarUltimo(eId);
             Expediente e = repoExpe.BuscarExpedientePorId(eId);
-            actualizacionEstado.Ejecutar(e, tramite.Etiqueta);
+            actualizacionEstado.Ejecutar(e.ID, tramite.Etiqueta);
         }
         else
         {

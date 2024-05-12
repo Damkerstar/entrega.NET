@@ -21,6 +21,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             {
                 sw.WriteLine(tramite.IDTramite);
                 sw.WriteLine(tramite.ExpedienteId);
+                sw.WriteLine(tramite.ExpedienteId);
                 sw.WriteLine(tramite.Etiqueta);
                 sw.WriteLine(tramite.descripcion);
                 sw.WriteLine(tramite.fechaYhoraCreacion);
@@ -189,5 +190,20 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
         throw new RepositorioException("El expediente buscado no existe.");
 
+    }
+
+    public List<Tramite> BuscarEtiqueta(string etiqueta)
+    {
+        List<Tramite> listaTramites = ListarTramite();
+        EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
+        List<Tramite> resultado = null;
+        foreach(Tramite tramite in listaTramites)
+        {
+            if(tramite.Etiqueta == etiq)
+            {
+                resultado.Add(tramite);
+            }
+        }
+        return resultado;
     }
 }

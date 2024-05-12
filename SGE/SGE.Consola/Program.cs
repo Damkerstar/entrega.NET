@@ -16,7 +16,8 @@ class Program
 
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio());
         var AltaTramite = new CasoDeUsoTramiteAlta(TramiteRepositorio, new TramiteValidador(), new ServicioAutorizacionProvisorio());
-        //var TramitePorID = new CasoDeUsoTramitePorEtiquete(TramiteRepositorio);
+        var TramitePorID = new CasoDeUsoTramiteConsultaPorEtiqueta(TramiteRepositorio);
+        var TramiteModificacion = new CasoDeUsoTramiteModificacion(TramiteRepositorio, new ServicioAutorizacionProvisorio(), new ServicioActualizacionEstado(ExpedienteRepositorio, new EspecificacionCambioEstado()));
     
         try
         {

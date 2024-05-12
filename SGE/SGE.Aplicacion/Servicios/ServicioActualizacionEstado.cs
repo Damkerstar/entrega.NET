@@ -1,14 +1,14 @@
 namespace SGE.Aplicacion;
-// VERIFICAR CON ESPECIFICACION Y EJECUTAR ESTE PARA CAMBIAR EL ESTADO DEL EXPEDIENTE DEPENDIENDO DEL ULTIMO TRAMITE
-public class ServicioActualizacionEstado(IExpedienteRepositorio repoExpe, EspecificacionCambioEstado cambioEstado)
+public class ServicioActualizacionEstado(IExpedienteRepositorio repoExpediente, EspecificacionCambioEstado cambioEstado)
 {
-    public void Ejecutar(Expediente e, EtiquetaTramite etiqueta)
+    public void Ejecutar(int idE, EtiquetaTramite etiqueta)
     {
+        Expediente e = repoExpediente.BuscarExpedientePorId(idE);
         EstadoExpediente estado = cambioEstado.Ejecutar(etiqueta) ?? e.Estado;
 
         if(estado != null)
         {
-            repoExpe.ModificarEstadoExpediente(e, estado);
+            repoExpediente.ModificarEstadoExpediente(e, estado);
         }
         
     }
