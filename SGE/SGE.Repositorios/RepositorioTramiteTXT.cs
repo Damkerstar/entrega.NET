@@ -10,14 +10,14 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
     {
         int id = RepositorioTramiteID.conseguirID();
         tramite.IDTramite = id;
-        EscribirTramite(tramite, true);
+        EscribirTramite(tramite);
     }
 
-        private void EscribirTramite(Tramite tramite, bool ok)
+        private void EscribirTramite(Tramite tramite)
     {
         if(File.Exists(_nombreArch))
         {    
-            using (var sw = new StreamWriter(_nombreArch, ok))
+            using (var sw = new StreamWriter(_nombreArch, true))
             {
                 sw.WriteLine($"{tramite.IDTramite} || {tramite.ExpedienteId} || {tramite.idUsuario} || {tramite.Etiqueta} || {tramite.descripcion} || {tramite.fechaYhoraCreacion} || {tramite.fechaYhoraModificacion} || {tramite.idUsuario}");
             }
@@ -155,9 +155,9 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
         if(File.Exists(_nombreArch))
         {
-            using (var sw = new StreamWriter(_nombreArch, false))
+            using (var sw = new StreamWriter(_nombreArch))
             {
-                foreach(Tramite tramiteAct in listTramite)
+                foreach(Tramite tramite in listTramite)
                 {    
                     sw.WriteLine($"{tramite.IDTramite} || {tramite.ExpedienteId} || {tramite.idUsuario} || {tramite.Etiqueta} || {tramite.descripcion} || {tramite.fechaYhoraCreacion} || {tramite.fechaYhoraModificacion} || {tramite.idUsuario}");
                 }
