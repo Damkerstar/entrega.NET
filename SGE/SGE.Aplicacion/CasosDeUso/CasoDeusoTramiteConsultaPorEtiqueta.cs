@@ -1,9 +1,8 @@
 namespace SGE.Aplicacion;
-class CasoDeUsoTramiteConsultaPorEtiqueta(ITramiteRepositorio repoT)
+public class CasoDeUsoTramiteConsultaPorEtiqueta(ITramiteRepositorio repoT)
 {
-    public void Ejecutar(int idE)
+    public void Ejecutar(string etiqueta)
     {
-        repoT.BuscarEtiqueta(idE);
-        
+        repoT.BuscarEtiqueta(etiqueta);
     }
 }

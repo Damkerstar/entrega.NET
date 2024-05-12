@@ -1,10 +1,14 @@
 namespace SGE.Aplicacion;
 
-class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, IServicioAutorizacion autorizacion)
+public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, ITramiteRepositorio repoTramite, EspecificacionCambioEstado especificacion, ServicioActualizacionEstado actualizacionEstado)
 {
-    public void Ejecutar()
+    public void Ejecutar(int idE,int idUsuario)
     {
-        //CasoDeUsoTramiteConsultaporEtiqueta.
+        if (especificacion.VerificacionPermiso(idUsuario, Permiso.ExpedienteModificacion))
+        {
+            Tramite tramite = repoTramite.BuscarUltimo(idE);
+            repoExpe.ModificarEstado(tramite.ExpedienteId, tramite.Etiqueta);
+        }
     }
 }
 // SI se borra un tramite se debe pasar al estado anterior con la etiqueta del tramite anterior

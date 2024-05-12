@@ -3,21 +3,19 @@ using SGE.Aplicacion;
 
 public class RepositorioTramiteID
 {
-
-    //readonly string _nombresito = "TramiteID.txt";
-
     public static int conseguirID()
     {
+        string nombresito = @"..\SGE.Repositorios\TramiteID.txt";
 
         int id;
-        using var sr = new StreamReader("TramiteID.txt");
+        using var sr = new StreamReader(nombresito);
         {   
             id = int.Parse(sr.ReadLine() ?? "");
         }
         
         id++;
         
-        using var sw = new StreamWriter("TramiteID.txt");
+        using var sw = new StreamWriter(nombresito);
         {
             sw.WriteLine(id);
         }

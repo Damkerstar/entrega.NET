@@ -4,7 +4,7 @@ using SGE.Aplicacion;
 public class RepositorioExpedienteTXT: IExpedienteRepositorio
 {
     
-    readonly string _nomArchivo = "expedientes.txt";    
+    readonly string _nomArchivo = @"..\SGE.Repositorios\expedientes.txt";    
 
     public void AgregarExpediente(Expediente e)
     {
@@ -29,8 +29,8 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
                 expedienteCopia.caratula = exp[1];
                 expedienteCopia.fechaYHoraCreacion = DateTime.Parse(exp[2]);
                 expedienteCopia.fechaYHoraActualizacion = DateTime.Parse(exp[3]);
-                expedienteCopia.usuarioID = int.Parse(exp[4]);
-                expedienteCopia.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), exp[5]);
+                expedienteCopia.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), exp[4]);
+                expedienteCopia.usuarioID = int.Parse(exp[5]);
 
                 resultado.Add(expedienteCopia);
             }
@@ -42,64 +42,61 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
     {
 
         List<Expediente> listaExpedientes = ListarExpedientes();
+        Expediente e;
 
-        RepositorioTramiteTXT.EliminarCompleto(eID);
-        bool encontre = false;
+        bool encontre = true;
 
         if(File.Exists(_nomArchivo))
         {
-
-            foreach(Expediente e in listaExpedientes)
+            encontre = false;
+            int i = 0;
+            while(i <= listaExpedientes.Count && !encontre)
             {
-
+                e = listaExpedientes[i];
                 if(e.ID == eID)
                 {
-
                     listaExpedientes.Remove(e);
                     encontre = true;
-
                 }
-
             }
 
         }
-
         if(!encontre)
         {
             throw new RepositorioException("El expediente buscado no existe.");
         }
         else
         {
-            SobreEscribirExpediente(listaExpedientes);
+            SobrescribirListExpediente(listaExpedientes);
         }
 
     }
 
-    private static void SobrescribirExpediente(List<Expediente> lista)
+    private void SobrescribirListExpediente(List<Expediente> lista)
     {
 
         if(File.Exists(_nomArchivo))
         {
 
-            foreach(Expediente e in lista)
+            using (var sw = new StreamWriter(_nomArchivo))
             {
-
-                EscribirExpediente(e);
-
+                foreach(Expediente e in lista)
+                {
+                    sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion.ToString()} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
+                }
             }
-
         }
-
     }
 
-    public static void EscribirExpediente(Expediente e)
+    public void EscribirExpediente(Expediente e)
     {
 
-        using var sw = new StreamWriter(_nomArchivo);
-        {
+        if(File.Exists(_nomArchivo))
+        {    using (var sw = new StreamWriter(_nomArchivo, true))
+            {
 
-            sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion.ToString()} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
-
+                sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
+            }
         }
 
     }

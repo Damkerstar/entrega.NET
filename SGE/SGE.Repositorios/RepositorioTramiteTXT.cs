@@ -3,18 +3,18 @@ using SGE.Aplicacion;
 
 public class RepositorioTramiteTXT : ITramiteRepositorio
 {
-    readonly string _nombreArch = "tramites.txt";
-    public static void AgregarTramite(Tramite tramite)
+    readonly string _nombreArch = @"..\SGE.Repositorios\tramites.txt";
+    public void AgregarTramite(Tramite tramite)
     {
         int id = RepositorioTramiteID.conseguirID();
         tramite.IDTramite = id;
-        escribirTramite(tramite);
+        escribirTramite(tramite, true);
     }
 
-    public static List<Tramite> ListarTramite()
+    public List<Tramite> ListarTramite()
     {
         var resultado = new List<Tramite>();
-        using var sr = new StreamReader("tramites.txt");
+        using (var sr = new StreamReader(_nombreArch))
         while(!sr.EndOfStream)
         {
             Tramite tramiteCopi = new Tramite();
@@ -30,53 +30,72 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return resultado;
     }
 
-    public static void EliminarTramite(int idtramite)
+    public void EliminarTramite(int idtramite)
     {
-        if(File.Exists("tramites.txt"))
+        if(File.Exists(_nombreArch))
         {
-            bool ok = false;
             List<Tramite> listTramite = ListarTramite();
-            foreach(Tramite tramite in listTramite)
-            {
-                if(tramite.IDTramite == idtramite){
-                    listTramite.Remove(tramite);
-                    ok = true;
+            Tramite tramite;
+            int i = 0;
+
+            if(File.Exists(_nombreArch))
+            {   
+                
+                while(i <= listTramite.Count && i != -1)
+                {
+                    tramite = listTramite[i];
+                    if(tramite.IDTramite == idtramite)
+                    {
+                        listTramite.Remove(tramite);
+                        i = -1;
+                    }
+                    else
+                    {
+                        i++;
+                    }
                 }
             }
 
-            foreach(var tramiteActual in listTramite)
+            if(i != -1)
             {
-                AgregarTramite(tramiteActual);
-            }
-
-            if(ok)
                 throw new RepositorioException("No existe el tramite en cuestion");
+            }
+
+            sobrescribirListTramites(listTramite);
         }
     }
 
-    public static void EliminarCompleto(int idE)
+    public void EliminarCompleto(int idE)
     {
-        List<Tramite> lista = ListarTramite();
-
-        foreach(Tramite tActual in lista)
+        List<Tramite> listaTramite = ListarTramite();
+        Tramite tramite;
+        
+        int i = 0;
+        while(i <= listaTramite.Count && i != -1)
         {
-            if(tActual.ExpedienteId == idE)
+            tramite = listaTramite[i];
+            if(tramite.ExpedienteId == idE)
             {
-                lista.Remove(tActual);
+                listaTramite.Remove(tramite);
+                i = -1;
+            }
+            else
+            {
+                i++;
             }
         }
 
-        foreach(Tramite tActual in lista)
+        if(i == -1)
         {
-            sobrescribirTramites(tActual);
+            sobrescribirListTramites(listaTramite);
         }
     }
 
-    private Tramite BuscarUltimo(int idE)
+    public Tramite BuscarUltimo(int idE)
     {
         List<Tramite> listaPorExpedientes = listarPorExpediente(idE);
         Tramite maxTramite = new Tramite();
-        // Preguntar porque queda con maxTramite de esa forma
+
         maxTramite.IDTramite = -1;
         foreach(Tramite tActual in listaPorExpedientes)
         {
@@ -88,7 +107,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    private List<Tramite> listarPorExpediente(int idE)
+    public List<Tramite> listarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();
@@ -102,23 +121,57 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return listaPorExpediente;
     }
 
-    private static void sobrescribirTramites(Tramite tramite)
+    public void TramiteModificacion(int idTramite, string etiqueta)
     {
-        if(File.Exists("tramite.txt"))
+        List<Tramite> listTramite = ListarTramite();
+        Tramite tramite;
+        int i = 0;
+        while(i <= listTramite.Count && i != -1)
         {
-            escribirTramite(tramite);
+            tramite = listTramite[i];
+            if(tramite.IDTramite == idTramite)
+            {
+                tramite.Etiqueta = (Etiqueta_Tramite) Enum.Parse(typeof(Etiqueta_Tramite), etiqueta);
+                i = -1;
+            }
+            else
+            {
+                i++;
+            }
+        }
+
+        if(i != -1)
+        {
+            throw new RepositorioException("No existe el tramite en cuestion");
+        }
+        else
+        {
+            sobrescribirListTramites(listTramite);
         }
     }
 
-    private static void escribirTramite(Tramite tramite)
+    private void sobrescribirListTramites(List<Tramite> listTramite)
     {
-        using var sw = new StreamWriter("tramite.txt", true);
-        sw.WriteLine(tramite.IDTramite);
-        sw.WriteLine(tramite.ExpedienteId);
-        sw.WriteLine(tramite.Etiqueta);
-        sw.WriteLine(tramite.descripcion);
-        sw.WriteLine(tramite.fechaYhoraCreacion);
-        sw.WriteLine(tramite.fechaYhoraModificacion);
-        sw.WriteLine(tramite.idUsuario);
+        foreach(Tramite tramiteAct in listTramite)
+        {
+            escribirTramite(tramiteAct, true);
+        }
+    }
+
+    private void escribirTramite(Tramite tramite, bool ok)
+    {
+        if(File.Exists(_nombreArch))
+        {    
+            using (var sw = new StreamWriter(_nombreArch, ok))
+            {
+                sw.WriteLine(tramite.IDTramite);
+                sw.WriteLine(tramite.ExpedienteId);
+                sw.WriteLine(tramite.Etiqueta);
+                sw.WriteLine(tramite.descripcion);
+                sw.WriteLine(tramite.fechaYhoraCreacion);
+                sw.WriteLine(tramite.fechaYhoraModificacion);
+                sw.WriteLine(tramite.idUsuario);
+            }
+        }    
     }
 }

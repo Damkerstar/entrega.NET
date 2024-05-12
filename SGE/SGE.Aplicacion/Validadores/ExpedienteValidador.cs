@@ -8,7 +8,7 @@ public class ExpedienteValidador
 
         errorMessage = "";
 
-        if(string.IsNullOrWhiteSpace(e.Caratula))
+        if(string.IsNullOrWhiteSpace(e.caratula))
         {
             errorMessage = "La carátula no puede estar vacía.\n";
         }
