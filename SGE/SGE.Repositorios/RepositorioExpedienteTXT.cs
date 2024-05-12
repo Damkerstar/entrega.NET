@@ -28,7 +28,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
     }
 
-    public List<Expediente> ListarExpedientes()
+    private List<Expediente> ListarExpedientes()
     {
         var resultado = new List<Expediente>();
         using (StreamReader sr = new StreamReader(_nomArchivo))
@@ -121,17 +121,19 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
             aux = lista[i];
 
-            if(aux.Equals(e))
+            if(aux.ID == e.ID)
             {
-                e.Estado =  estado;
-                e.fechaYHoraActualizacion = DateTime.Now;
+                Console.WriteLine("A");
+                aux.Estado =  estado;
+                aux.fechaYHoraActualizacion = DateTime.Now;
                 encontre = true;
+
             }
 
-            i++
+            i++;
 
         }        
-        
+
         SobrescribirListaExpediente(lista);
 
     }
@@ -155,6 +157,24 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
         throw new RepositorioException("El expediente buscado no existe.");
 
+    }
+
+    public void ImprimirPantalla()
+    {
+        List<Expediente> lista = ListarExpedientes();
+        foreach(Expediente e in lista)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    public void ImprimirPantallaPorId(Expediente e)
+    {
+        Console.WriteLine(e);
+        foreach(Tramite t in e.TramiteList)
+        {
+            Console.WriteLine(t);
+        }
     }
 
 }

@@ -125,7 +125,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    public List<Tramite> ListarPorExpediente(int idE)
+    private List<Tramite> ListarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();
@@ -141,7 +141,6 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     public void ModificarTramite(Tramite t, EtiquetaTramite etiqueta)
     {
-
         List<Tramite> listaTramites = ListarTramite();
         Tramite tramite;
         int i = 0;
@@ -149,9 +148,10 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         while(i <= listaTramites.Count && i != -1)
         {
             tramite = listaTramites[i];
-            if(tActual.ID == t.ID)
+            if(tramite.IDTramite == t.IDTramite)
             {
-                t.Etiqueta = etiqueta;
+                tramite.Etiqueta = etiqueta;
+                tramite.fechaYhoraModificacion = DateTime.Now;
                 i = -1;
             }
             else
@@ -159,7 +159,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
                 i++;
             }
         }
-        SobrescribirListaTramites(copiaLista);
+        SobrescribirListaTramites(listaTramites);
     }
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
@@ -199,7 +199,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     }
 
-    public List<Tramite> BuscarEtiqueta(string etiqueta)
+    public void BuscarEtiqueta(string etiqueta)
     {
         List<Tramite> listaTramites = ListarTramite();
         EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
@@ -211,6 +211,14 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
                 resultado.Add(tramite);
             }
         }
-        return resultado;
+        ImprimirPantallaPorEtiqueta(resultado);
+    }
+
+    private void ImprimirPantallaPorEtiqueta(List<Tramite> listTramite)
+    {
+        foreach(Tramite tramite in listTramite)
+        {
+            Console.WriteLine(tramite);
+        }
     }
 }

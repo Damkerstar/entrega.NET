@@ -25,41 +25,35 @@ class Program
     
         try
         {
-            // Dar de alta 3 expedientes
+            // Dar de alta 3 Expedientes
             AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
             AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
             AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
 
-            // Obtener una lista de los expedientes y imprimirla
-            var lista = ExpedienteRepositorio.ListarExpedientes();   
-        
-            foreach(Expediente e in lista)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            // Dar de baja expediente 3
-            // BajaExpediente.Ejecutar();
-
-            // Dar de alta 3 tramites y imprimirlo
-            AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1){}, 1);
-            TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
-
+            // Dar de alta 3 Tramites
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1){}, 1);
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 2){}, 1);
 
-            var listaTramite = TramiteRepositorio.ListarTramite();
 
-            foreach(Tramite tramite in listaTramite)
-            {
-                Console.WriteLine(tramite);
-            }
+            // Listar Tramites
+            TodosExpedientes.Ejecutar();
 
-            foreach(Expediente e in lista)
-            {
-                Console.WriteLine(e.ToString());
-            }
 
+            // Dar de baja expediente 3
+            BajaExpediente.Ejecutar(3, 1);
+
+
+            // Modificar Tramite 1 y dar de alta otro tramite en el mismo Expediente
+            TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
+            AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1), 1);
+
+
+            // Listar Expedientes
+            TodosExpedientes.Ejecutar();
+
+
+            // Listar Tramites
+            
 
         }
         catch (Exception ex)

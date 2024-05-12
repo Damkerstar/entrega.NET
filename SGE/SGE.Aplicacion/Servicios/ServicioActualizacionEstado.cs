@@ -5,7 +5,7 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio repoExpediente, 
     {
         Expediente e = repoExpediente.BuscarExpedientePorId(idE);
         EstadoExpediente estado = cambioEstado.Ejecutar(etiqueta) ?? e.Estado;
-
         repoExpediente.ModificarEstadoExpediente(e, estado);
+        
     }
 }

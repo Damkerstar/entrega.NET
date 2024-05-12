@@ -9,5 +9,6 @@ public class CasoDeUsoExpedienteConsultaPorId(IExpedienteRepositorio repoExpedie
     {
         Expediente e = repoExpediente.BuscarExpedientePorId(idE);
         e.TramiteList = repoTramite.ListarPorExpediente(idE);
+        repoExpediente.ImprimirPantallaPorId(e);
     }
 }

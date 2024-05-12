@@ -4,10 +4,12 @@ public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServ
 {
     public void Ejecutar(int idTramite, string etiquetaString, int idUsuario)
     {
+
         if(autorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteModificacion))
         {
             Tramite tAux = repoTramite.BuscarTramite(idTramite);
             EtiquetaTramite etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiquetaString);
+            
             repoTramite.ModificarTramite(tAux, etiqueta);
 
             servicioActualizacion.Ejecutar(tAux.ExpedienteId, tAux.Etiqueta);
