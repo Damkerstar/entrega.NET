@@ -1,6 +1,7 @@
 namespace SGE.Aplicacion;
 
-public enum EstadoExpediente{
+public enum EstadoExpediente
+{
     Recien_Iniciado,
     Para_Resolver,
     Con_Resolucion,

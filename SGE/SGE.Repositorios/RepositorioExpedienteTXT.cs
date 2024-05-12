@@ -15,6 +15,19 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
     }
 
+    public void EscribirExpediente(Expediente e)
+    {
+
+        if(File.Exists(_nomArchivo))
+        {    
+            using (var sw = new StreamWriter(_nomArchivo, true))
+            {
+                sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
+            }
+        }
+
+    }
+
     public List<Expediente> ListarExpedientes()
     {
         var resultado = new List<Expediente>();
@@ -42,25 +55,18 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
     {
 
         List<Expediente> listaExpedientes = ListarExpedientes();
-        Expediente e;
+        Expediente e = BuscarExpedientePorId(eID);
 
-        bool encontre = true;
+        bool encontre = false;
 
-        if(File.Exists(_nomArchivo))
+        if(listaExpedientes.Contains(e))
         {
-            encontre = false;
-            int i = 0;
-            while(i <= listaExpedientes.Count && !encontre)
-            {
-                e = listaExpedientes[i];
-                if(e.ID == eID)
-                {
-                    listaExpedientes.Remove(e);
-                    encontre = true;
-                }
-            }
+
+            listaExpedientes.Remove(e);
+            encontre = true;
 
         }
+        
         if(!encontre)
         {
             throw new RepositorioException("El expediente buscado no existe.");
@@ -76,21 +82,26 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
     {
 
         if(File.Exists(_nomArchivo))
-        {
-            using (var sw = new StreamWriter(_nomArchivo))
+        {    
+            using (var sw = new StreamWriter(_nomArchivo, false))
             {
+
                 foreach(Expediente e in lista)
                 {
-                    sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion.ToString()} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
+
+                    sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
+
                 }
+
             }
         }
+
     }
 
-    public void ModificarEstadoExpediente(Expediente e, string etiqueta)
+    public void ModificarEstadoExpediente(Expediente e, EstadoExpediente estado)
     {
 
-        e.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), etiqueta);
+        e.Estado =  estado;
         e.fechaYHoraActualizacion = DateTime.Now;
         List<Expediente> lista = ListarExpedientes();
         SobrescribirListaExpediente(lista);
@@ -115,19 +126,6 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
         }
 
         throw new RepositorioException("El expediente buscado no existe.");
-
-    }
-
-    public void EscribirExpediente(Expediente e)
-    {
-
-        if(File.Exists(_nomArchivo))
-        {    using (var sw = new StreamWriter(_nomArchivo, true))
-            {
-
-                sw.WriteLine($"{e.ID} || {e.caratula} || {e.fechaYHoraCreacion} || {e.fechaYHoraActualizacion.ToString()} || {e.Estado} || {e.usuarioID}");
-            }
-        }
 
     }
 

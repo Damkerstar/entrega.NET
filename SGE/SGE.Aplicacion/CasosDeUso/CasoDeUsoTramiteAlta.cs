@@ -14,5 +14,11 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValida
             repoTramite.AgregarTramite(tramite);
 
         }
+        else
+        {
+
+            throw new AutorizacionException("No posee los permisos necesarios para realizar esa operación.");
+
+        }
     }
 }

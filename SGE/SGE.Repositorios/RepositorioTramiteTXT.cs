@@ -3,7 +3,9 @@ using SGE.Aplicacion;
 
 public class RepositorioTramiteTXT : ITramiteRepositorio
 {
+
     readonly string _nombreArch = @"..\SGE.Repositorios\tramites.txt";
+
     public void AgregarTramite(Tramite tramite)
     {
         int id = RepositorioTramiteID.conseguirID();
@@ -11,21 +13,42 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         EscribirTramite(tramite, true);
     }
 
+        private void EscribirTramite(Tramite tramite, bool ok)
+    {
+        if(File.Exists(_nombreArch))
+        {    
+            using (var sw = new StreamWriter(_nombreArch, ok))
+            {
+                sw.WriteLine(tramite.IDTramite);
+                sw.WriteLine(tramite.ExpedienteId);
+                sw.WriteLine(tramite.Etiqueta);
+                sw.WriteLine(tramite.descripcion);
+                sw.WriteLine(tramite.fechaYhoraCreacion);
+                sw.WriteLine(tramite.fechaYhoraModificacion);
+                sw.WriteLine(tramite.idUsuario);
+            }
+        }    
+    }
+
     public List<Tramite> ListarTramite()
     {
         var resultado = new List<Tramite>();
         using (var sr = new StreamReader(_nombreArch))
-        while(!sr.EndOfStream)
         {
-            Tramite tramiteCopi = new Tramite();
-            tramiteCopi.IDTramite = int.Parse(sr.ReadLine() ?? "");
-            tramiteCopi.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
-            tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), sr.ReadLine()?? "");
-            tramiteCopi.descripcion = sr.ReadLine();
-            tramiteCopi.fechaYhoraCreacion = DateTime.Parse(sr.ReadLine()?? "");
-            tramiteCopi.fechaYhoraModificacion = DateTime.Parse(sr.ReadLine()?? "");
-            tramiteCopi.idUsuario = int.Parse(sr.ReadLine()?? "");
-            resultado.Add(tramiteCopi);
+            while(!sr.EndOfStream)
+            {
+                Tramite tramiteCopi = new Tramite();
+
+                tramiteCopi.IDTramite = int.Parse(sr.ReadLine() ?? "");
+                tramiteCopi.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
+                tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), sr.ReadLine()?? "");
+                tramiteCopi.descripcion = sr.ReadLine();
+                tramiteCopi.fechaYhoraCreacion = DateTime.Parse(sr.ReadLine()?? "");
+                tramiteCopi.fechaYhoraModificacion = DateTime.Parse(sr.ReadLine()?? "");
+                tramiteCopi.idUsuario = int.Parse(sr.ReadLine()?? "");
+
+                resultado.Add(tramiteCopi);
+            }
         }
         return resultado;
     }
@@ -68,26 +91,25 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
     public void EliminarCompleto(int idE)
     {
         List<Tramite> listaTramite = ListarTramite();
-        Tramite tramite;
+        List<Tramite> listaTramiteCopia = ListarTramite();
+        bool listaModificada = false;
         
-        int i = 0;
-        while(i <= listaTramite.Count && i != -1)
+        foreach(Tramite t in listaTramite)
         {
-            tramite = listaTramite[i];
-            if(tramite.ExpedienteId == idE)
+
+            if(t.ExpedienteId == idE)
             {
-                listaTramite.Remove(tramite);
-                i = -1;
+
+                listaTramiteCopia.Remove(t);
+                listaModificada = true;
+
             }
-            else
-            {
-                i++;
-            }
+
         }
 
-        if(i == -1)
+        if(listaModificada)
         {
-            SobrescribirListaTramites(listaTramite);
+            SobrescribirListaTramites(listaTramiteCopia);
         }
     }
 
@@ -121,58 +143,23 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return listaPorExpediente;
     }
 
-    public void ModificarTramite(int idTramite, string etiqueta)
+    public void ModificarTramite(Tramite t, EtiquetaTramite etiqueta)
     {
-        List<Tramite> listTramite = ListarTramite();
-        Tramite tramite;
-        int i = 0;
-        while(i <= listTramite.Count && i != -1)
-        {
-            tramite = listTramite[i];
-            if(tramite.IDTramite == idTramite)
-            {
-                tramite.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
-                i = -1;
-            }
-            else
-            {
-                i++;
-            }
-        }
+        
+        List<Tramite> lista = ListarTramite();
 
-        if(i != -1)
-        {
-            throw new RepositorioException("No existe el tramite en cuestion");
-        }
-        else
-        {
-            SobrescribirListaTramites(listTramite);
-        }
+        t.Etiqueta = etiqueta;
+
+        SobrescribirListaTramites(lista);
+
     }
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
     {
         foreach(Tramite tramiteAct in listTramite)
         {
-            EscribirTramite(tramiteAct, true);
+            EscribirTramite(tramiteAct, false);
         }
-    }
-
-    private void EscribirTramite(Tramite tramite, bool ok)
-    {
-        if(File.Exists(_nombreArch))
-        {    
-            using (var sw = new StreamWriter(_nombreArch, ok))
-            {
-                sw.WriteLine(tramite.IDTramite);
-                sw.WriteLine(tramite.ExpedienteId);
-                sw.WriteLine(tramite.Etiqueta);
-                sw.WriteLine(tramite.descripcion);
-                sw.WriteLine(tramite.fechaYhoraCreacion);
-                sw.WriteLine(tramite.fechaYhoraModificacion);
-                sw.WriteLine(tramite.idUsuario);
-            }
-        }    
     }
 
     public int BuscarExpedientePorTramite(Tramite t)

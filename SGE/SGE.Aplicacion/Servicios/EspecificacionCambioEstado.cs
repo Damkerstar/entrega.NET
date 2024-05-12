@@ -3,25 +3,23 @@ using SGE.Aplicacion;
 public class EspecificacionCambioEstado(ServicioActualizacionEstado servicioActualizacion)
 {
     
-    public void Ejecutar(Expediente e, EtiquetaTramite etiqueta)
+    public EstadoExpediente? Ejecutar(EtiquetaTramite etiqueta)
     {
-            
-        string etiquetaTramite = $"{etiqueta}";
 
-        switch(etiquetaTramite)
+        switch(etiqueta)
         {
 
-            case "Resolucion":
-                    servicioActualizacion.Ejecutar(e, "Resolucion");
-                    break;
+            case (EtiquetaTramite.Resolucion):
+                    return EstadoExpediente.Con_Resolucion;
             
-            case "Pase_Estudio":
-                    servicioActualizacion.Ejecutar(e, "Pase_Estudio");
-                    break;
+            case (EtiquetaTramite.Pase_Estudio):
+                    return EstadoExpediente.Para_Resolver;
 
-            case "Pase_Archivo":
-                    servicioActualizacion.Ejecutar(e, "Pase_Archivo");
-                    break;
+            case (EtiquetaTramite.Pase_Archivo):
+                    return EstadoExpediente.Finalizado;
+                
+            default:
+                    return null;
 
         }
 

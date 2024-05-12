@@ -1,17 +1,24 @@
 using SGE.Aplicacion;
 
-public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, EspecificacionCambioEstado cambioEstado, IExpedienteRepositorio repoExpediente)
+public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, ServicioActualizacionEstado servicioActualizacion, IExpedienteRepositorio repoExpediente)
 {
-    public void Ejecutar(int idTramite, string etiqueta, int idUsuario)
+    public void Ejecutar(int idTramite, string etiquetaString, int idUsuario)
     {
         if(autorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteModificacion))
         {
-            repoTramite.ModificarTramite(idTramite, etiqueta);
             Tramite tAux = repoTramite.BuscarTramite(idTramite);
+            EtiquetaTramite etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiquetaString);
+            repoTramite.ModificarTramite(tAux, etiqueta);
 
             int idExpediente = repoTramite.BuscarExpedientePorTramite(tAux);
             Expediente eAux = repoExpediente.BuscarExpedientePorId(idExpediente);
-            cambioEstado.Ejecutar(eAux, tAux.Etiqueta);
+            servicioActualizacion.Ejecutar(eAux, tAux.Etiqueta);
+        }
+        else
+        {
+
+            throw new AutorizacionException("No posee los permisos necesarios para realizar esa operación.");
+
         }
     }
 }

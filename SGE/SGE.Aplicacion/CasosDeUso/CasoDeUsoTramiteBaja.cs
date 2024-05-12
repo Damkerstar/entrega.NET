@@ -7,6 +7,12 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTramite, IServicioAuto
         {
             repoTramite.EliminarTramite(idTramite);
         }
+        else
+        {
+
+            throw new AutorizacionException("No posee los permisos necesarios para realizar esa operación.");
+
+        }
 
     }
 }

@@ -10,12 +10,12 @@ public class ExpedienteValidador
 
         if(string.IsNullOrWhiteSpace(e.caratula))
         {
-            errorMessage = "La carátula no puede estar vacía.\n";
+            errorMessage = "La carátula no puede estar vacía.\n" ;
         }
 
-        if(e.ID <= 0)
+        if(e.usuarioID <= 0)
         {
-            errorMessage += "La ID debe ser mayor a 0.\n";
+            errorMessage += "La ID de usuario debe ser mayor a 0.\n" ;
         }
 
         return (errorMessage == "");

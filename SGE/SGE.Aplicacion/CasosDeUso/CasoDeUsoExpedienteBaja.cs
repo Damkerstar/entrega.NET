@@ -9,9 +9,15 @@ public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repoExpediente, ITra
         if(autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
         {
 
-            repoTramite.EliminarCompleto(idExpediente);
+            //repoTramite.EliminarCompleto(idExpediente);
 
             repoExpediente.EliminarExpediente(idExpediente);
+
+        }
+        else
+        {
+
+            throw new AutorizacionException("No posee los permisos necesarios para realizar esa operación.");
 
         }
 

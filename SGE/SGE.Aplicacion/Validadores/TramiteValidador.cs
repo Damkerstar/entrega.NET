@@ -2,7 +2,7 @@ namespace SGE.Aplicacion;
 
 public class TramiteValidador
 {
-    public bool ValidarTramite(Tramite tramite,out string msg)
+    public bool ValidarTramite(Tramite tramite, out string msg)
     {
 
         msg = "";

@@ -4,7 +4,7 @@ namespace SGE.Aplicacion;
 public class Expediente
 {
 
-    private int  _id;
+    private int _id;
     public int ID {get => _id;
                     set {_id = value; } }
     public string? caratula;
@@ -28,8 +28,8 @@ public class Expediente
     {
 
         this.caratula = caratula;
-        this.fechaYHoraActualizacion = this.fechaYHoraCreacion;
         this.usuarioID = usuarioID;
+        this.fechaYHoraActualizacion = this.fechaYHoraCreacion;
 
     }
 
