@@ -41,15 +41,15 @@ public class Tramite
     public override string ToString()
     {
         return $"""
-        ID tramite: {IDTramite}\n\t
-          ID expediente: {ExpedienteId}
-          ID usuario: {idUsuario}
-          Etiqueta: {Etiqueta}
-          Descripción: {descripcion}
-          Fecha y hora de:
-            Creacion: {fechaYhoraCreacion}
-            Modificacion: {fechaYhoraModificacion}
-        """;
+        ID tramite: {IDTramite}
+           ID expediente: {ExpedienteId}
+           ID usuario: {idUsuario}
+           Etiqueta: {Etiqueta}
+           Descripción: {descripcion}
+           Fecha y hora de:
+             creacion: {fechaYhoraCreacion}
+             modificacion: {fechaYhoraModificacion}
+        """ + "\n";
     }
 
 }

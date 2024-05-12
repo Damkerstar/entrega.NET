@@ -3,7 +3,7 @@ namespace SGE.Aplicacion;
 public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ExpedienteValidador validador, IServicioAutorizacion autorizacion)
 {
         
-    public void Ejecutar(Expediente e)
+    public void Ejecutar(Expediente e, int idExpediente)
     {
 
         if(autorizacion.PoseeElPermiso(e.usuarioID, Permiso.ExpedienteAlta))

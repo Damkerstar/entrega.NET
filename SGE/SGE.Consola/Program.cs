@@ -18,7 +18,7 @@ class Program
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
         var AltaTramite = new CasoDeUsoTramiteAlta(TramiteRepositorio, new TramiteValidador(), new ServicioAutorizacionProvisorio(), ServicioActualizacion);
         var TramitePorID = new CasoDeUsoTramiteConsultaPorEtiqueta(TramiteRepositorio);
-        var TramiteModificacion = new CasoDeUsoTramiteModificacion(TramiteRepositorio, new ServicioAutorizacionProvisorio(), new ServicioActualizacionEstado(ExpedienteRepositorio, new EspecificacionCambioEstado()));
+        var TramiteModificacion = new CasoDeUsoTramiteModificacion(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
     
         try
         {
@@ -26,19 +26,12 @@ class Program
             Expediente expediente2 = new Expediente("Thomas", 1);
             Expediente expediente3 = new Expediente("Matias", 1);
 
-            AltaExpediente.Ejecutar(expediente1);
-            AltaExpediente.Ejecutar(expediente2);
-            AltaExpediente.Ejecutar(expediente3);
+            AltaExpediente.Ejecutar(expediente1, 1);
+            AltaExpediente.Ejecutar(expediente2, 1);
+            AltaExpediente.Ejecutar(expediente3, 1);
 
             var lista = ExpedienteRepositorio.ListarExpedientes();   
         
-            foreach(Expediente e in lista)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            BajaExpediente.Ejecutar(2, 1);
-
             foreach(Expediente e in lista)
             {
                 Console.WriteLine(e.ToString());
@@ -48,9 +41,9 @@ class Program
             Tramite tramite2 = new Tramite("DDDD", 1, 1);
             Tramite tramite3 = new Tramite("DORMIR", 1, 2);
 
-            AltaTramite.Ejecutar(tramite1);
-            AltaTramite.Ejecutar(tramite2);
-            AltaTramite.Ejecutar(tramite3);
+            AltaTramite.Ejecutar(tramite1, 1);
+            AltaTramite.Ejecutar(tramite2, 1);
+            AltaTramite.Ejecutar(tramite3, 1);
 
             var listaTramite = TramiteRepositorio.ListarTramite();
 

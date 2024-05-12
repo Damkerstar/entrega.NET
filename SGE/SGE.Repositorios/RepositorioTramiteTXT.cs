@@ -21,7 +21,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             {
                 sw.WriteLine(tramite.IDTramite);
                 sw.WriteLine(tramite.ExpedienteId);
-                sw.WriteLine(tramite.ExpedienteId);
+                sw.WriteLine(tramite.idUsuario);
                 sw.WriteLine(tramite.Etiqueta);
                 sw.WriteLine(tramite.descripcion);
                 sw.WriteLine(tramite.fechaYhoraCreacion);
@@ -42,6 +42,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
                 tramiteCopi.IDTramite = int.Parse(sr.ReadLine() ?? "");
                 tramiteCopi.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
+                tramiteCopi.idUsuario = int.Parse(sr.ReadLine() ?? "");
                 tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), sr.ReadLine()?? "");
                 tramiteCopi.descripcion = sr.ReadLine();
                 tramiteCopi.fechaYhoraCreacion = DateTime.Parse(sr.ReadLine()?? "");

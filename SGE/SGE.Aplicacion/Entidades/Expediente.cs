@@ -37,6 +37,14 @@ public class Expediente
 
     public override string ToString()
     {
-        return $"ID de Expediente: {ID}\n\tID de Usuario: {usuarioID}\n\tcarátula: {caratula}\n\tfecha y hora de:\n\t\t creación {fechaYHoraCreacion.ToString()}\n\t\t modificacion {fechaYHoraActualizacion.ToString()}\n\tEstado: {Estado}\n";
+        return $"""
+        ID de Expediente: {ID}
+           ID de Usuario: {usuarioID}
+           Carátula: {caratula}
+           Fecha y hora de:
+             creación {fechaYHoraCreacion.ToString()}
+             modificacion {fechaYHoraActualizacion.ToString()}
+           Estado: {Estado} 
+        """ + "\n";
     }
 }

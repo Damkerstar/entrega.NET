@@ -8,14 +8,14 @@ public class RepositorioTramiteID
         string nombreArch = @"..\SGE.Repositorios\TramiteID.txt";
 
         int id;
-        using var sr = new StreamReader(nombreArch);
+        using (var sr = new StreamReader(nombreArch))
         {   
             id = int.Parse(sr.ReadLine() ?? "");
         }
         
         id++;
         
-        using var sw = new StreamWriter(nombreArch);
+        using (var sw = new StreamWriter(nombreArch))
         {
             sw.WriteLine(id);
         }
