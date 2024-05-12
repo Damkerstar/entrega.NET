@@ -111,9 +111,27 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
     public void ModificarEstadoExpediente(Expediente e, EstadoExpediente estado)
     {
 
-        e.Estado =  estado;
-        e.fechaYHoraActualizacion = DateTime.Now;
         List<Expediente> lista = ListarExpedientes();
+        Expediente aux;
+        int i = 0;
+        bool encontre = false;
+
+        while((i <= lista.Count) && (!encontre))
+        {
+
+            aux = lista[i];
+
+            if(aux.Equals(e))
+            {
+                e.Estado =  estado;
+                e.fechaYHoraActualizacion = DateTime.Now;
+                encontre = true;
+            }
+
+            i++
+
+        }        
+        
         SobrescribirListaExpediente(lista);
 
     }
