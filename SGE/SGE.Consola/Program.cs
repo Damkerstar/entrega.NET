@@ -14,8 +14,8 @@ class Program
         var BajaExpediente = new CasoDeUsoExpedienteBaja(ExpedienteRepositorio, TramiteRepositorio, new ServicioAutorizacionProvisorio());
         var AltaExpediente = new CasoDeUsoExpedienteAlta(ExpedienteRepositorio, new ExpedienteValidador(), new ServicioAutorizacionProvisorio());
         var TodosExpedientes = new CasoDeUsoExpedienteConsultaTodos(ExpedienteRepositorio);
-        //var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
-        //var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
+        var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
+        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
 
         // Casos de uso Tramite
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
@@ -47,13 +47,16 @@ class Program
             TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1), 1);
 
+            // Modificacion Expediente
+            ModiExpediente.Ejecutar();
 
             // Listar Expedientes
             TodosExpedientes.Ejecutar();
 
+            // Listar Tramites por etiqueta
+            TramitePorID.Ejecutar("Escrito_Presentado");
 
-            // Listar Tramites
-            
+            // Listar 
 
         }
         catch (Exception ex)
