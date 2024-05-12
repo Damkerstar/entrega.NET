@@ -15,8 +15,8 @@ class Program
         //var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
         //var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
 
-        var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio());
-        var AltaTramite = new CasoDeUsoTramiteAlta(TramiteRepositorio, new TramiteValidador(), new ServicioAutorizacionProvisorio());
+        var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), new ServicioActualizacionEstado());
+        var AltaTramite = new CasoDeUsoTramiteAlta(TramiteRepositorio, new TramiteValidador(), new ServicioAutorizacionProvisorio(), ServicioActualizacionEstado());
         var TramitePorID = new CasoDeUsoTramiteConsultaPorEtiqueta(TramiteRepositorio);
         var TramiteModificacion = new CasoDeUsoTramiteModificacion(TramiteRepositorio, new ServicioAutorizacionProvisorio(), new ServicioActualizacionEstado(ExpedienteRepositorio, new EspecificacionCambioEstado()));
     
@@ -42,6 +42,21 @@ class Program
             foreach(Expediente e in lista)
             {
                 Console.WriteLine(e.ToString());
+            }
+
+            Tramite tramite1 = new Tramite("AAAAH", 1, 1);
+            Tramite tramite2 = new Tramite("DDDD", 1, 1);
+            Tramite tramite3 = new Tramite("DORMIR", 1, 2);
+
+            AltaTramite.Ejecutar(tramite1);
+            AltaTramite.Ejecutar(tramite2);
+            AltaTramite.Ejecutar(tramite3);
+
+            var listaTramite = TramiteRepositorio.ListarTramite();
+
+            foreach(Tramite tramite in listaTramite)
+            {
+                Console.WriteLine(tramite);
             }
 
         }
