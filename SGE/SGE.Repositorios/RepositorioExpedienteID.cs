@@ -7,17 +7,17 @@ public class RepositorioExpedienteID
     public static int conseguirID()
     {
 
-        string nombresito = @"..\SGE.Repositorios\ExpedienteID.txt";
+        string nombreArch = @"..\SGE.Repositorios\ExpedienteID.txt";
 
         int id;
-        using (var sr = new StreamReader(nombresito))
+        using (var sr = new StreamReader(nombreArch))
         {   
             id = int.Parse(sr.ReadLine() ?? "");
         }
         
         id++;
         
-        using (var sw = new StreamWriter(nombresito))
+        using (var sw = new StreamWriter(nombreArch))
         {
             sw.WriteLine(id);
         }

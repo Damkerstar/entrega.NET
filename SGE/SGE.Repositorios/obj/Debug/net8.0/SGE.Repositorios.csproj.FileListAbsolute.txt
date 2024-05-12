@@ -1,0 +1,6 @@
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\entrega.NET\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.sourcelink.json

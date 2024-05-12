@@ -77,7 +77,6 @@ public class RepositorioExpedienteTXT: IExpedienteRepositorio
 
         if(File.Exists(_nomArchivo))
         {
-
             using (var sw = new StreamWriter(_nomArchivo))
             {
                 foreach(Expediente e in lista)
