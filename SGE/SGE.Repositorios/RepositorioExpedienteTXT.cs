@@ -36,7 +36,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
             while(!sr.EndOfStream)
             {
                 Expediente expedienteCopia = new Expediente();
-                string[]? exp = (sr.ReadLine().Split("||")) ?? null;
+                string[]? exp = (sr.ReadLine().Split(" || ")) ?? null;
 
                 expedienteCopia.ID = int.Parse(exp[0]);
                 expedienteCopia.caratula = exp[1];

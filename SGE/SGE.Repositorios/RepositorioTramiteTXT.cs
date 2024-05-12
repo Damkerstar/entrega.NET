@@ -19,14 +19,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         {    
             using (var sw = new StreamWriter(_nombreArch, ok))
             {
-                sw.WriteLine(tramite.IDTramite);
-                sw.WriteLine(tramite.ExpedienteId);
-                sw.WriteLine(tramite.idUsuario);
-                sw.WriteLine(tramite.Etiqueta);
-                sw.WriteLine(tramite.descripcion);
-                sw.WriteLine(tramite.fechaYhoraCreacion);
-                sw.WriteLine(tramite.fechaYhoraModificacion);
-                sw.WriteLine(tramite.idUsuario);
+                sw.WriteLine($"{tramite.IDTramite} || {tramite.ExpedienteId} || {tramite.idUsuario} || {tramite.Etiqueta} || {tramite.descripcion} || {tramite.fechaYhoraCreacion} || {tramite.fechaYhoraModificacion} || {tramite.idUsuario}");
             }
         }    
     }
@@ -39,15 +32,16 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             while(!sr.EndOfStream)
             {
                 Tramite tramiteCopi = new Tramite();
+                string[]? tr = (sr.ReadLine().Split(" || ")) ?? null;
 
-                tramiteCopi.IDTramite = int.Parse(sr.ReadLine() ?? "");
-                tramiteCopi.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
-                tramiteCopi.idUsuario = int.Parse(sr.ReadLine() ?? "");
-                tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), sr.ReadLine()?? "");
-                tramiteCopi.descripcion = sr.ReadLine();
-                tramiteCopi.fechaYhoraCreacion = DateTime.Parse(sr.ReadLine()?? "");
-                tramiteCopi.fechaYhoraModificacion = DateTime.Parse(sr.ReadLine()?? "");
-                tramiteCopi.idUsuario = int.Parse(sr.ReadLine()?? "");
+                tramiteCopi.IDTramite = int.Parse(tr[0]);
+                tramiteCopi.ExpedienteId = int.Parse(tr[1]);
+                tramiteCopi.idUsuario = int.Parse(tr[2]);
+                tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), tr[3]);
+                tramiteCopi.descripcion = tr[4];
+                tramiteCopi.fechaYhoraCreacion = DateTime.Parse(tr[5]);
+                tramiteCopi.fechaYhoraModificacion = DateTime.Parse(tr[6]);
+                tramiteCopi.idUsuario = int.Parse(tr[7]);
 
                 resultado.Add(tramiteCopi);
             }
