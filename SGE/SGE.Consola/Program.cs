@@ -14,8 +14,8 @@ class Program
         var BajaExpediente = new CasoDeUsoExpedienteBaja(ExpedienteRepositorio, TramiteRepositorio, new ServicioAutorizacionProvisorio());
         var AltaExpediente = new CasoDeUsoExpedienteAlta(ExpedienteRepositorio, new ExpedienteValidador(), new ServicioAutorizacionProvisorio());
         var TodosExpedientes = new CasoDeUsoExpedienteConsultaTodos(ExpedienteRepositorio);
-        //var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
-        //var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
+        var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
+        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
 
         // Casos de uso Tramite
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
@@ -26,7 +26,7 @@ class Program
         try
         {
             // Dar de alta 3 Expedientes
-            AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
+            /*AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
             AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
             AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
 
@@ -52,8 +52,13 @@ class Program
             TodosExpedientes.Ejecutar();
 
 
-            // Listar Tramites por etiqueta
+            // Listar Tramites por etiqueta*/
 
+            Expediente expedienteEjemplo = new Expediente("Carátula del Expediente", 1);
+            Tramite tramiteEjemplo = new Tramite("Descripción del Trámite", 1, 1);
+            AltaExpediente.Ejecutar(expedienteEjemplo, 1);
+            AltaTramite.Ejecutar(tramiteEjemplo, 1);
+            ExpedientesPorID.Ejecutar();
 
         }
         catch (Exception ex)
