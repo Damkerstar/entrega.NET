@@ -47,6 +47,8 @@ class Program
             TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1), 1);
 
+            // Modificacion Expediente
+            ModiExpediente.Ejecutar();
 
             // Listar Expedientes
             TodosExpedientes.Ejecutar();
@@ -59,6 +61,11 @@ class Program
             AltaExpediente.Ejecutar(expedienteEjemplo, 1);
             AltaTramite.Ejecutar(tramiteEjemplo, 1);
             ExpedientesPorID.Ejecutar();
+            
+            // Listar Tramites por etiqueta
+            //TramitePorID.Ejecutar("Escrito_Presentado");
+
+            // Listar 
 
         }
         catch (Exception ex)

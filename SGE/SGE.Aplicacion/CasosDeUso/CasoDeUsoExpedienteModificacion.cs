@@ -18,4 +18,3 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, IT
         }
     }
 }
-// Si se borra un tramite se debe pasar al estado anterior con la etiqueta del tramite anterior
