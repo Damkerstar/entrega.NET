@@ -125,7 +125,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    private List<Tramite> ListarPorExpediente(int idE)
+    public List<Tramite> ListarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();

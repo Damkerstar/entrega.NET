@@ -56,16 +56,16 @@ class Program
 
             // Listar Tramites por etiqueta*/
 
+            // Listar Tramites por etiqueta
+            //TramitePorID.Ejecutar("Escrito_Presentado");
+
+            // Listar 
+
             Expediente expedienteEjemplo = new Expediente("Carátula del Expediente", 1);
             Tramite tramiteEjemplo = new Tramite("Descripción del Trámite", 1, 1);
             AltaExpediente.Ejecutar(expedienteEjemplo, 1);
             AltaTramite.Ejecutar(tramiteEjemplo, 1);
             ExpedientesPorID.Ejecutar();
-            
-            // Listar Tramites por etiqueta
-            //TramitePorID.Ejecutar("Escrito_Presentado");
-
-            // Listar 
 
         }
         catch (Exception ex)
