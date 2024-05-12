@@ -1,6 +1,6 @@
 using SGE.Aplicacion;
 
-public class EspecificacionCambioEstado(ServicioActualizacionEstado servicioActualizacion)
+public class EspecificacionCambioEstado
 {
     
     public EstadoExpediente? Ejecutar(EtiquetaTramite etiqueta)

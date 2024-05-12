@@ -6,10 +6,7 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio repoExpe, Especi
     {
         EstadoExpediente estado = cambioEstado.Ejecutar(etiqueta) ?? e.Estado;
 
-        if(estado != null)
-        {
-            repoExpe.ModificarEstadoExpediente(e, estado);
-        }
+        repoExpe.ModificarEstadoExpediente(e, estado);
         
     }
 }
