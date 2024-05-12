@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValidador validador, IServicioAutorizacion autorizacion)
+public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValidador validador, IServicioAutorizacion autorizacion, ServicioActualizacionEstado servicioActualizacion, IExpedienteRepositorio repoExpediente)
 {
     public void Ejecutar(Tramite tramite, int idUsuario)
     {
@@ -11,7 +11,13 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValida
             {
                 throw new Exception(msg);
             }
-            repoTramite.AgregarTramite(tramite);
+            else
+            {
+                repoTramite.AgregarTramite(tramite);
+                int expedienteID = repoTramite.BuscarExpedientePorTramite(tramite);
+                Expediente e = repoExpediente.BuscarExpedientePorId(expedienteID);
+                servicioActualizacion.Ejecutar(e, tramite.Etiqueta);
+            }
 
         }
         else

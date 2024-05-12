@@ -28,12 +28,13 @@ public class Tramite
 
     }
 
-    public Tramite(string descripcion, int idUsuario) 
+    public Tramite(string descripcion, int idUsuario, int expedienteId) 
     {
 
         this.descripcion = descripcion;
         this.fechaYhoraModificacion = fechaYhoraCreacion;
         this.idUsuario = idUsuario;
+        this.ExpedienteId = expedienteId;
 
     }
 

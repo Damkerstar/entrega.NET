@@ -31,12 +31,12 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
     public List<Expediente> ListarExpedientes()
     {
         var resultado = new List<Expediente>();
-        using var sr = new StreamReader(_nomArchivo);
+        using (StreamReader sr = new StreamReader(_nomArchivo))
         {
             while(!sr.EndOfStream)
             {
                 Expediente expedienteCopia = new Expediente();
-                string[] exp = sr.ReadLine().Split("||");
+                string[]? exp = (sr.ReadLine().Split("||")) ?? null;
 
                 expedienteCopia.ID = int.Parse(exp[0]);
                 expedienteCopia.caratula = exp[1];
@@ -54,19 +54,35 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
     public void EliminarExpediente(int eID)
     {
 
-        List<Expediente> listaExpedientes = ListarExpedientes();
         Expediente e = BuscarExpedientePorId(eID);
+        List<Expediente> listaExpedientes = ListarExpedientes();
+        Expediente aux;
+        int i = 0;
 
         bool encontre = false;
 
-        if(listaExpedientes.Contains(e))
+        while((i <= listaExpedientes.Count) && (!encontre))
         {
 
-            listaExpedientes.Remove(e);
-            encontre = true;
+            aux = listaExpedientes[i];
+            
+            if(aux.ID == e.ID)
+            {
+                listaExpedientes.Remove(aux);
+                encontre = true;
+            }
+            
+            i++;
 
         }
-        
+
+        foreach(Expediente aa in listaExpedientes)
+        {
+
+            Console.WriteLine(aa.ID);
+
+        }    
+    
         if(!encontre)
         {
             throw new RepositorioException("El expediente buscado no existe.");
@@ -83,7 +99,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
         if(File.Exists(_nomArchivo))
         {    
-            using (var sw = new StreamWriter(_nomArchivo, false))
+            using (var sw = new StreamWriter(_nomArchivo))
             {
 
                 foreach(Expediente e in lista)
