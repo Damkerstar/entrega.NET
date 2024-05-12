@@ -128,7 +128,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
                 encontre = true;
             }
 
-            i++
+            i++;
 
         }        
         
