@@ -7,6 +7,7 @@ class Program
     {
         IExpedienteRepositorio ExpedienteRepositorio = new RepositorioExpedienteTXT();
         ITramiteRepositorio TramiteRepositorio = new RepositorioTramiteTXT();
+        ServicioActualizacionEstado ServicioActualizacion = new ServicioActualizacionEstado(ExpedienteRepositorio, new EspecificacionCambioEstado());
 
         var BajaExpediente = new CasoDeUsoExpedienteBaja(ExpedienteRepositorio, TramiteRepositorio, new ServicioAutorizacionProvisorio());
         var AltaExpediente = new CasoDeUsoExpedienteAlta(ExpedienteRepositorio, new ExpedienteValidador(), new ServicioAutorizacionProvisorio());
