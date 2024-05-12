@@ -75,13 +75,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
             i++;
 
         }
-
-        foreach(Expediente aa in listaExpedientes)
-        {
-
-            Console.WriteLine(aa.ID);
-
-        }    
+  
     
         if(!encontre)
         {
