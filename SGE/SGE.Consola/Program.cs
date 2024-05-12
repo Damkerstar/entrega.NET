@@ -26,9 +26,9 @@ class Program
         try
         {
             // Dar de alta 3 expedientes
-            AltaExpediente.Ejecutar(new Expediente(){caratula = "Carátula del Expediente", ID = 1}, 1);
-            AltaExpediente.Ejecutar(new Expediente(){caratula = "Carátula del Expediente", ID = 1}, 1);
-            AltaExpediente.Ejecutar(new Expediente(){caratula = "Carátula del Expediente", ID = 1}, 1);
+            AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
+            AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
+            AltaExpediente.Ejecutar(new Expediente("Carátula del Expediente", 1){}, 1);
 
             // Obtener una lista de los expedientes y imprimirla
             var lista = ExpedienteRepositorio.ListarExpedientes();   
@@ -38,10 +38,15 @@ class Program
                 Console.WriteLine(e.ToString());
             }
 
+            // Dar de baja expediente 3
+            // BajaExpediente.Ejecutar();
+
             // Dar de alta 3 tramites y imprimirlo
-            AltaTramite.Ejecutar(new Tramite(){descripcion = "Descripción del Tramite", ID = 1, idE = 1}, 1);
-            AltaTramite.Ejecutar(new Tramite(){descripcion = "Descripción del Tramite", ID = 1, idE = 1}, 1);
-            AltaTramite.Ejecutar(new Tramite(){descripcion = "Descripción del Tramite", ID = 1, idE = 2}, 1);
+            AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1){}, 1);
+            TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
+
+            AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1){}, 1);
+            AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 2){}, 1);
 
             var listaTramite = TramiteRepositorio.ListarTramite();
 
@@ -50,7 +55,12 @@ class Program
                 Console.WriteLine(tramite);
             }
 
-            
+            foreach(Expediente e in lista)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+
         }
         catch (Exception ex)
         {
