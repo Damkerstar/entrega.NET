@@ -32,18 +32,21 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
             while(!sr.EndOfStream)
             {
                 Tramite tramiteCopi = new Tramite();
-                string[]? tr = (sr.ReadLine().Split(" || ")) ?? null;
+                string st = sr.ReadLine() ?? "";
+                string[]? tr = (st.Split(" || ")) ?? null;
+                if(tr != null)
+                {
+                    tramiteCopi.IDTramite = int.Parse(tr[0]);
+                    tramiteCopi.ExpedienteId = int.Parse(tr[1]);
+                    tramiteCopi.idUsuario = int.Parse(tr[2]);
+                    tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), tr[3]);
+                    tramiteCopi.descripcion = tr[4];
+                    tramiteCopi.fechaYhoraCreacion = DateTime.Parse(tr[5]);
+                    tramiteCopi.fechaYhoraModificacion = DateTime.Parse(tr[6]);
+                    tramiteCopi.idUsuario = int.Parse(tr[7]);
 
-                tramiteCopi.IDTramite = int.Parse(tr[0]);
-                tramiteCopi.ExpedienteId = int.Parse(tr[1]);
-                tramiteCopi.idUsuario = int.Parse(tr[2]);
-                tramiteCopi.Etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), tr[3]);
-                tramiteCopi.descripcion = tr[4];
-                tramiteCopi.fechaYhoraCreacion = DateTime.Parse(tr[5]);
-                tramiteCopi.fechaYhoraModificacion = DateTime.Parse(tr[6]);
-                tramiteCopi.idUsuario = int.Parse(tr[7]);
-
-                resultado.Add(tramiteCopi);
+                    resultado.Add(tramiteCopi);
+                }
             }
         }
         return resultado;
@@ -208,7 +211,6 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         if(Enum.IsDefined(typeof(EtiquetaTramite), etiqueta))
         {
             EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
-            List<Tramite> resultado;
             foreach(Tramite tramite in listaTramites)
             {
                 if(tramite.Etiqueta == etiq)

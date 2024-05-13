@@ -36,16 +36,19 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
             while(!sr.EndOfStream)
             {
                 Expediente expedienteCopia = new Expediente();
-                string[]? exp = (sr.ReadLine().Split(" || ")) ?? null;
+                string st = sr.ReadLine() ?? "";
+                string[]? exp = (st.Split(" || ")) ?? null;
+                if(exp != null)
+                {
+                    expedienteCopia.ID = int.Parse(exp[0]);
+                    expedienteCopia.caratula = exp[1];
+                    expedienteCopia.fechaYHoraCreacion = DateTime.Parse(exp[2]);
+                    expedienteCopia.fechaYHoraActualizacion = DateTime.Parse(exp[3]);
+                    expedienteCopia.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), exp[4]);
+                    expedienteCopia.usuarioID = int.Parse(exp[5]);
 
-                expedienteCopia.ID = int.Parse(exp[0]);
-                expedienteCopia.caratula = exp[1];
-                expedienteCopia.fechaYHoraCreacion = DateTime.Parse(exp[2]);
-                expedienteCopia.fechaYHoraActualizacion = DateTime.Parse(exp[3]);
-                expedienteCopia.Estado = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), exp[4]);
-                expedienteCopia.usuarioID = int.Parse(exp[5]);
-
-                resultado.Add(expedienteCopia);
+                    resultado.Add(expedienteCopia);
+                }
             }
         }
         return resultado;

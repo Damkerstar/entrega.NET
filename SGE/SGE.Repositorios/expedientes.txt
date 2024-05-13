@@ -1,2 +1,5 @@
-1 || Carátula del Expediente || 12/5/2024 21:53:59 || 12/5/2024 21:53:59 || Para_Resolver || 1
-2 || Nueva caratula || 12/5/2024 21:53:59 || 12/5/2024 21:53:59 || Recien_Iniciado || 1
+1 || Carátula del Expediente || 12/5/2024 22:04:39 || 12/5/2024 22:06:25 || Para_Resolver || 1
+2 || Nueva caratula || 12/5/2024 22:04:39 || 12/5/2024 22:06:25 || Recien_Iniciado || 1
+4 || Carátula del Expediente || 12/5/2024 22:06:25 || 12/5/2024 22:06:25 || Recien_Iniciado || 1
+5 || Carátula del Expediente || 12/5/2024 22:06:25 || 12/5/2024 22:06:25 || Recien_Iniciado || 1
+6 || Carátula del Expediente || 12/5/2024 22:06:25 || 12/5/2024 22:06:25 || Recien_Iniciado || 1

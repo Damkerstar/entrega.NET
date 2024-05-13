@@ -65,6 +65,7 @@ class Program
             // Baja Tramite
             BajaTramite.Ejecutar(2, 1);
 
+            Console.WriteLine("Listar TODOS EXPEDIENTES POR ID");
             // Listar Expedientes por ID
             ExpedientesPorID.Ejecutar(1);
 
