@@ -1,2 +1,2 @@
-1 || Carátula del Expediente || 12/5/2024 21:46:43 || 12/5/2024 21:46:43 || Recien_Iniciado || 1
-2 || Nueva caratula || 12/5/2024 21:46:43 || 12/5/2024 21:46:43 || Recien_Iniciado || 1
+1 || Carátula del Expediente || 12/5/2024 21:53:59 || 12/5/2024 21:53:59 || Para_Resolver || 1
+2 || Nueva caratula || 12/5/2024 21:53:59 || 12/5/2024 21:53:59 || Recien_Iniciado || 1

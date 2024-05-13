@@ -10,8 +10,10 @@ public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, IServ
             Tramite tAux = repoTramite.BuscarTramite(idTramite);
             
             repoTramite.ModificarTramite(tAux, etiqueta);
-            // HACER 
-            servicioActualizacion.Ejecutar(tAux.ExpedienteId, tAux.Etiqueta);
+
+            Tramite tramite = repoTramite.BuscarTramite(idTramite);
+            
+            servicioActualizacion.Ejecutar(tramite.ExpedienteId, tramite.Etiqueta);
         }
         else
         {
