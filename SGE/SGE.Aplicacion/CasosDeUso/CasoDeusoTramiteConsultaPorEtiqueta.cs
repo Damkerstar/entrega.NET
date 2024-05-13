@@ -3,6 +3,6 @@ public class CasoDeUsoTramiteConsultaPorEtiqueta(ITramiteRepositorio repoTramite
 {
     public void Ejecutar(string etiqueta)
     {
-        repoTramite.BuscarEtiqueta(etiqueta);
+        repoTramite.ImprimirPantallaPorEtiqueta(etiqueta);
     }
 }

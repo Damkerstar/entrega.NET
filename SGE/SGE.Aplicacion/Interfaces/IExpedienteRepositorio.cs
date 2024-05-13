@@ -8,4 +8,5 @@ public interface IExpedienteRepositorio
     Expediente BuscarExpedientePorId(int eId);
     void ImprimirPantalla();
     void ImprimirPantallaPorId(Expediente e);
+    void CambioDeInfo(int idE, string caratula, string estado);
 }

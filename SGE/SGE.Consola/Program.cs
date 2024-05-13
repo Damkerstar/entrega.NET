@@ -14,8 +14,8 @@ class Program
         var BajaExpediente = new CasoDeUsoExpedienteBaja(ExpedienteRepositorio, TramiteRepositorio, new ServicioAutorizacionProvisorio());
         var AltaExpediente = new CasoDeUsoExpedienteAlta(ExpedienteRepositorio, new ExpedienteValidador(), new ServicioAutorizacionProvisorio());
         var TodosExpedientes = new CasoDeUsoExpedienteConsultaTodos(ExpedienteRepositorio);
-        var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorID(ExpedienteRepositorio);
-        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
+        var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorId(ExpedienteRepositorio, TramiteRepositorio);
+        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio(), new ExpedienteValidador());
 
         // Casos de uso Tramite
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
@@ -35,28 +35,31 @@ class Program
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 2){}, 1);
 
 
-            // Listar Tramites
+            // Listar Expedientes todos
             TodosExpedientes.Ejecutar();
-
 
             // Dar de baja expediente 3
             BajaExpediente.Ejecutar(3, 1);
 
-
             // Modificar Tramite 1 y dar de alta otro tramite en el mismo Expediente
             TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
+            TodosExpedientes.Ejecutar();
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1), 1);
 
             // Modificacion Expediente
-            ModiExpediente.Ejecutar();
+            ModiExpediente.Ejecutar(2, 1, "Nueva caratula", "En_Notificacio");
 
             // Listar Expedientes
             TodosExpedientes.Ejecutar();
-
+            Console.WriteLine("a");
             // Listar Tramites por etiqueta
             TramitePorID.Ejecutar("Escrito_Presentado");
+            Console.WriteLine("a");
+            // Baja Tramite
+            BajaTramite.Ejecutar(2, 1);
 
-            // Listar 
+            // Listar Expedientes por ID
+            ExpedientesPorID.Ejecutar(1);
 
         }
         catch (Exception ex)

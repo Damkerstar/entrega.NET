@@ -7,7 +7,7 @@ public interface ITramiteRepositorio
     void EliminarCompleto(int idExpediente);
     Tramite BuscarTramite(int idTramite);
     Tramite BuscarUltimo(int idExpediente);
-    void BuscarEtiqueta(string etiqueta);
+    void ImprimirPantallaPorEtiqueta(string etiqueta);
     List<Tramite> ListarPorExpediente(int idExpediente);
-    void ModificarTramite(Tramite t, EtiquetaTramite etiqueta);
+    void ModificarTramite(Tramite t, string etiqueta);
 }

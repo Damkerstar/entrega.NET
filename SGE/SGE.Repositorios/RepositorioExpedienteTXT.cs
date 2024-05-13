@@ -123,7 +123,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
 
             if(aux.ID == e.ID)
             {
-                Console.WriteLine("A");
+
                 aux.Estado =  estado;
                 aux.fechaYHoraActualizacion = DateTime.Now;
                 encontre = true;
@@ -164,7 +164,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
         List<Expediente> lista = ListarExpedientes();
         foreach(Expediente e in lista)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.ToString());
         }
     }
 
@@ -175,6 +175,42 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
         {
             Console.WriteLine(t);
         }
+    }
+
+    public void CambioDeInfo(int idE, string caratula, string estado)
+    {
+        List<Expediente> lista = ListarExpedientes();
+        Expediente aux;
+        int i = 0;
+        bool encontre = false;
+
+        while((i <= lista.Count) && (!encontre))
+        {
+
+            aux = lista[i];
+
+            if(aux.ID == idE)
+            {
+                
+                if(Enum.IsDefined(typeof(EstadoExpediente), estado))
+                {
+
+                    EstadoExpediente est = (EstadoExpediente) Enum.Parse(typeof(EstadoExpediente), estado);
+                    aux.Estado = est;
+                    
+                }
+
+                    aux.caratula =  caratula;
+                    encontre = true;
+
+            }
+
+            i++;
+
+        }
+
+        SobrescribirListaExpediente(lista);
+        
     }
 
 }

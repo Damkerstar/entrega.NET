@@ -1,14 +1,21 @@
 namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, ITramiteRepositorio repoTramite, IServicioAutorizacion autorizacion, ServicioActualizacionEstado actualizacionEstado)
+public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repoExpe, IServicioAutorizacion autorizacion, ExpedienteValidador validador)
 {
-    public void Ejecutar(int eId, int idUsuario)
+    public void Ejecutar(int eId, int idUsuario, string caratula, string estado)
     {
         if (autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteModificacion))
         {
-            Tramite tramite = repoTramite.BuscarUltimo(eId);
-            Expediente e = repoExpe.BuscarExpedientePorId(eId);
-            actualizacionEstado.Ejecutar(e.ID, tramite.Etiqueta);
+
+            if(!string.IsNullOrWhiteSpace(caratula))
+            {
+                
+                repoExpe.CambioDeInfo(eId, caratula, estado);
+            }
+            else
+            {
+                throw new ValidacionException("La carátula no puede estar vacía.\n");
+            }
         }
         else
         {

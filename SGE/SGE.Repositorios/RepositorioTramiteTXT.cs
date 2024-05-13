@@ -125,7 +125,7 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return maxTramite;
     }
 
-    private List<Tramite> ListarPorExpediente(int idE)
+    public List<Tramite> ListarPorExpediente(int idE)
     {
         List<Tramite> lista = ListarTramite();
         List<Tramite> listaPorExpediente = new List<Tramite>();
@@ -139,27 +139,30 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
         return listaPorExpediente;
     }
 
-    public void ModificarTramite(Tramite t, EtiquetaTramite etiqueta)
+    public void ModificarTramite(Tramite t, string etiqueta)
     {
         List<Tramite> listaTramites = ListarTramite();
         Tramite tramite;
         int i = 0;
-
-        while(i <= listaTramites.Count && i != -1)
-        {
-            tramite = listaTramites[i];
-            if(tramite.IDTramite == t.IDTramite)
+        if(Enum.IsDefined(typeof(EtiquetaTramite), etiqueta))
+        {    
+            EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
+            while(i <= listaTramites.Count && i != -1)
             {
-                tramite.Etiqueta = etiqueta;
-                tramite.fechaYhoraModificacion = DateTime.Now;
-                i = -1;
+                tramite = listaTramites[i];
+                if(tramite.IDTramite == t.IDTramite)
+                {
+                    tramite.Etiqueta = etiq;
+                    tramite.fechaYhoraModificacion = DateTime.Now;
+                    i = -1;
+                }
+                else
+                {
+                    i++;
+                }
             }
-            else
-            {
-                i++;
-            }
+            SobrescribirListaTramites(listaTramites);
         }
-        SobrescribirListaTramites(listaTramites);
     }
 
     private void SobrescribirListaTramites(List<Tramite> listTramite)
@@ -199,26 +202,22 @@ public class RepositorioTramiteTXT : ITramiteRepositorio
 
     }
 
-    public void BuscarEtiqueta(string etiqueta)
+    public void ImprimirPantallaPorEtiqueta(string etiqueta)
     {
         List<Tramite> listaTramites = ListarTramite();
-        EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
-        List<Tramite> resultado = null;
-        foreach(Tramite tramite in listaTramites)
+        if(Enum.IsDefined(typeof(EtiquetaTramite), etiqueta))
         {
-            if(tramite.Etiqueta == etiq)
+            EtiquetaTramite etiq = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), etiqueta);
+            List<Tramite> resultado;
+            foreach(Tramite tramite in listaTramites)
             {
-                resultado.Add(tramite);
+                if(tramite.Etiqueta == etiq)
+                {
+                    Console.WriteLine(tramite);
+                }
             }
         }
-        ImprimirPantallaPorEtiqueta(resultado);
+
     }
 
-    private void ImprimirPantallaPorEtiqueta(List<Tramite> listTramite)
-    {
-        foreach(Tramite tramite in listTramite)
-        {
-            Console.WriteLine(tramite);
-        }
-    }
 }
