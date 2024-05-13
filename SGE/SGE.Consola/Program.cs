@@ -15,7 +15,7 @@ class Program
         var AltaExpediente = new CasoDeUsoExpedienteAlta(ExpedienteRepositorio, new ExpedienteValidador(), new ServicioAutorizacionProvisorio());
         var TodosExpedientes = new CasoDeUsoExpedienteConsultaTodos(ExpedienteRepositorio);
         var ExpedientesPorID = new CasoDeUsoExpedienteConsultaPorId(ExpedienteRepositorio, TramiteRepositorio);
-        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio(), new ExpedienteValidador());
+        var ModiExpediente = new CasoDeUsoExpedienteModificacion(ExpedienteRepositorio, new ServicioAutorizacionProvisorio());
 
         // Casos de uso Tramite
         var BajaTramite = new CasoDeUsoTramiteBaja(TramiteRepositorio, new ServicioAutorizacionProvisorio(), ServicioActualizacion);
@@ -35,6 +35,7 @@ class Program
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 2){}, 1);
 
 
+            Console.WriteLine("LISTAR TODOS EXPEDIENTES 1");
             // Listar Expedientes todos
             TodosExpedientes.Ejecutar();
 
@@ -42,19 +43,25 @@ class Program
             BajaExpediente.Ejecutar(3, 1);
 
             // Modificar Tramite 1 y dar de alta otro tramite en el mismo Expediente
-            TramiteModificacion.Ejecutar(1, "Pase_Archivo", 1);
+            TramiteModificacion.Ejecutar(1, "Pase_Estudio", 1);
+
+            Console.WriteLine("LISTAR TODOS EXPEDIENTES 2");
             TodosExpedientes.Ejecutar();
+
+
             AltaTramite.Ejecutar(new Tramite("Descripción del Tramite", 1, 1), 1);
 
             // Modificacion Expediente
             ModiExpediente.Ejecutar(2, 1, "Nueva caratula", "En_Notificacio");
 
+            Console.WriteLine("LISTAR TODOS EXPEDIENTES 3");
             // Listar Expedientes
             TodosExpedientes.Ejecutar();
-            Console.WriteLine("a");
+
+            Console.WriteLine("LISTAR TODOS Tramites por etiqueta 1");
             // Listar Tramites por etiqueta
             TramitePorID.Ejecutar("Escrito_Presentado");
-            Console.WriteLine("a");
+
             // Baja Tramite
             BajaTramite.Ejecutar(2, 1);
 
