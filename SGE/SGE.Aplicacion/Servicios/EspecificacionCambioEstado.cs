@@ -8,7 +8,8 @@ public class EspecificacionCambioEstado
 
         switch(etiqueta)
         {
-
+            case (EtiquetaTramite.Escrito_Presentado):
+                return EstadoExpediente.Recien_Iniciado;
             case (EtiquetaTramite.Resolucion):
                     return EstadoExpediente.Con_Resolucion;
             

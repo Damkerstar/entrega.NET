@@ -14,6 +14,7 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, TramiteValida
             else
             {
                 repoTramite.AgregarTramite(tramite);
+                
                 servicioActualizacion.Ejecutar(tramite.ExpedienteId, tramite.Etiqueta);
             }
 

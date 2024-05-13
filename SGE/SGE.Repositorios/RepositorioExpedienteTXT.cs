@@ -118,6 +118,7 @@ public class RepositorioExpedienteTXT : IExpedienteRepositorio
         Expediente aux;
         int i = 0;
         bool encontre = false;
+        
 
         while((i <= lista.Count) && (!encontre))
         {

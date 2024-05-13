@@ -3,6 +3,7 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio repoExpediente, 
 {
     public void Ejecutar(int idE, EtiquetaTramite etiqueta)
     {
+        
         Expediente e = repoExpediente.BuscarExpedientePorId(idE);
 
         EstadoExpediente estado = cambioEstado.Ejecutar(etiqueta) ?? e.Estado;
